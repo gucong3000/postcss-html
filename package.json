@@ -1,0 +1,40 @@
+{
+  "name": "postcss-html",
+  "version": "0.1.0",
+  "description": "PostCSS Syntax for parsing HTML",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gucong3000/postcss-html.git"
+  },
+  "keywords": [
+    "postcss",
+    "syntax",
+    "html",
+    "vue",
+    "css",
+    "less",
+    "sass",
+    "scss",
+    "sss",
+    "sugarss"
+  ],
+  "author": "gucong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gucong3000/postcss-html/issues"
+  },
+  "homepage": "https://github.com/gucong3000/postcss-html#readme",
+  "dependencies": {
+    "htmlparser2": "^3.9.2",
+    "postcss": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "mocha": "^3.4.1",
+    "postcss-scss": "^1.0.0"
+  }
+}
