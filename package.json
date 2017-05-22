@@ -4,7 +4,20 @@
   "description": "PostCSS Syntax for parsing HTML",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha"
+  },
+  "nyc": {
+    "lines": 97,
+    "statements": 97,
+    "functions": 98,
+    "branches": 96,
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "cache": true,
+    "all": true,
+    "check-coverage": true
   },
   "repository": {
     "type": "git",
@@ -33,8 +46,16 @@
     "postcss": "^6.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "mocha": "^3.4.1",
-    "postcss-scss": "^1.0.0"
+    "nyc": "^10.3.2",
+    "postcss-less": "^1.0.0",
+    "postcss-parser-tests": "^6.0.0",
+    "postcss-sass": "^0.1.0",
+    "postcss-scss": "^1.0.0",
+    "stylelint": "^7.10.1",
+    "sugarss": "^1.0.0"
   }
 }
