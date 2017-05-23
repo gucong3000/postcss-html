@@ -68,6 +68,50 @@ describe('API', () => {
 			expect(result.root.nodes).to.have.lengthOf(3);
 		});
 	});
+
+	it('single line syntax error', () => {
+		expect(() => [
+			syntax.parse('<style>a {</style>', {
+				from: 'SyntaxError.vue',
+			}),
+		]).to.throw(/\bCssSyntaxError:\s+.*:1:8: Unclosed block\n/);
+	});
+
+	it('single line with line ending syntax error', () => {
+		expect(() => [
+			syntax.parse('<style>a {</style>\n', {
+				from: 'SyntaxError.vue',
+			}),
+		]).to.throw(/\bCssSyntaxError:\s+.*:1:8: Unclosed block\n/);
+	});
+
+	it('multi line syntax error', () => {
+		expect(() => [
+			syntax.parse([
+				'<html>',
+				'<style>a {</style>',
+				'</html>',
+			].join('\n'), {
+				from: 'SyntaxError.vue',
+			}),
+		]).to.throw(/\bCssSyntaxError:\s+.*:2:8: Unclosed block\n/);
+	});
+
+	it('custom parse error', () => {
+		expect(() => [
+			syntax({
+				parse: function () {
+					throw new TypeError('custom parse error');
+				},
+			}).parse([
+				'<html>',
+				'<style>a {</style>',
+				'</html>',
+			].join('\n'), {
+				from: 'SyntaxError.vue',
+			}),
+		]).to.throw('custom parse error');
+	});
 });
 
 describe('html tests', () => {

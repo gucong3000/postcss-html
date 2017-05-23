@@ -4,13 +4,15 @@
   "description": "PostCSS Syntax for parsing HTML",
   "main": "lib/index.js",
   "scripts": {
+    "coveralls": "coveralls < coverage/lcov.info",
+    "pretest": "eslint lib",
     "test": "nyc mocha"
   },
   "nyc": {
-    "lines": 97,
-    "statements": 97,
-    "functions": 98,
-    "branches": 96,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
     "reporter": [
       "lcov",
       "text"
@@ -48,6 +50,7 @@
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "chai": "^3.5.0",
+    "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "mocha": "^3.4.1",
     "nyc": "^10.3.2",
