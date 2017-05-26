@@ -264,7 +264,7 @@ describe('vue tests', () => {
 	});
 	it('vue with lang(s)', () => {
 		const vue = [
-			'<style lang="scss">',
+			'<style lang="scss?outputStyle=expanded">',
 			'//sass style',
 			'//-----------------------------------',
 			'$fontStack:    Helvetica, sans-serif;',

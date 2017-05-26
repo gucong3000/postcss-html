@@ -1,11 +1,11 @@
 {
   "name": "postcss-html",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PostCSS Syntax for parsing HTML",
   "main": "lib/index.js",
   "scripts": {
     "coveralls": "coveralls < coverage/lcov.info",
-    "pretest": "eslint lib",
+    "pretest": "eslint lib test",
     "test": "nyc mocha"
   },
   "nyc": {
