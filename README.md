@@ -6,8 +6,8 @@ PostCSS HTML Syntax
 [![Coverage Status](https://img.shields.io/coveralls/gucong3000/postcss-html.svg)](https://coveralls.io/r/gucong3000/postcss-html)
 
 <img align="right" width="95" height="95"
-     title="Philosopher’s stone, logo of PostCSS"
-     src="http://postcss.github.io/postcss/logo.svg">
+	title="Philosopher’s stone, logo of PostCSS"
+	src="http://postcss.github.io/postcss/logo.svg">
 
 [PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML
 
@@ -34,7 +34,7 @@ If you want support SCSS/SASS/LESS/SugarSS syntaxh, you need to install the corr
 var syntax = require('postcss-html');
 postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
 	// An alias for the result.css property. Use it with syntaxes that generate non-CSS output.
-    result.content
+	result.content
 });
 ```
 
@@ -61,6 +61,6 @@ postcss(plugins).process(html, {
 		}
 	})
 }).then(function (result) {
-    result.content
+	result.content
 });
 ```
