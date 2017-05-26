@@ -11,6 +11,8 @@ PostCSS HTML Syntax
 
 [PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML
 
+> [vue component](https://vue-loader.vuejs.org/) compatible
+
 ## Getting Started
 
 First thing's first, install the module:
@@ -19,7 +21,7 @@ First thing's first, install the module:
 npm install postcss-html --save-dev
 ```
 
-If you want support SCSS/SASS/LESS/SugarSS syntax in HTML, you need to install the corresponding module.
+If you want support SCSS/SASS/LESS/SugarSS syntaxh, you need to install the corresponding module.
 
 - SCSS: [PostCSS-SCSS](https://github.com/postcss/postcss-scss)
 - SASS: [PostCSS-SASS](https://github.com/aleshaoleg/postcss-sass)
@@ -28,56 +30,37 @@ If you want support SCSS/SASS/LESS/SugarSS syntax in HTML, you need to install t
 
 ## Use Cases
 
+```js
+var syntax = require('postcss-html');
+postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
+	// An alias for the result.css property. Use it with syntaxes that generate non-CSS output.
+    result.content
+});
+```
+
 ### Style Transformations
 
 The main use case of this plugin is to apply PostCSS transformations directly to HTML source code. For example, if you ship a theme written in style tag in HTML and need [Autoprefixer](https://github.com/postcss/autoprefixer) to add the appropriate vendor prefixes to it; or you need to lint style source in HTML with a plugin such as [Stylelint](http://stylelint.io/).
 
-```js
-var syntax = require('postcss-html');
-postcss(plugins).process(html, { syntax: syntax }).then(function (result) {
-    result.content // HTML with transformations
-});
-```
+### Inferring the syntax of style file
 
-### custom Syntax for styles
+When passing a non-HTML file, this plugin will infer the syntax by file extension, and fallback by standard CSS syntax.
 
-#### Using map object configuration
-
-```js
-var syntax = require('postcss-html');
-postcss(plugins).process(html, {
-	syntax: syntax({
-		css: require('postcss'),
-		less: require('postcss-less'),
-		scss: require('postcss-scss'),
-	})
-}).then(function (result) {
-    result.content // HTML with transformations
-});
-```
-
-#### Using callback function configuration
+### Custom unknown syntax
 
 ```js
 var syntax = require('postcss-html');
 postcss(plugins).process(html, {
 	syntax: syntax((opts, lang) => {
-		if (lang) {
-			// `lang`: language of style tag in html.
-			// style tag in HTML file
-			if (lang === 'less') {
-				// `<style type="text/less">`
-				return require('postcss-scss')
-			}
-		} else if(opts.from) {
-			// `opts`: See http://api.postcss.org/global.html#processOptions
-			if (/\.less$/.test(opts.from)) {
-				// `*.less` file
-				return require('postcss-less')
-			}
+		if ('stylus' === lang) {
+			// Custom syntax by attribute of <style> tag
+			return require('postcss-stylus')
+		} else if (/\.styl$/.test(opts.from)) {
+			// Custom syntax by file extension
+			return require('postcss-stylus')
 		}
 	})
 }).then(function (result) {
-    result.content // HTML with transformations
+    result.content
 });
 ```

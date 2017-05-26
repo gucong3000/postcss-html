@@ -60,8 +60,8 @@ describe('API', () => {
 		]).process(html,	{
 			syntax: syntax({
 				css: postcss,
-				sugarss: require('sugarss'),
-				less: require('postcss-less'),
+				sugarss: 'sugarss',
+				less: 'postcss-less',
 			}),
 			from: 'api.vue',
 		}).then(result => {
