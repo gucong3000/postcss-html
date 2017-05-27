@@ -9,9 +9,7 @@ PostCSS HTML Syntax
 	title="Philosopher’s stone, logo of PostCSS"
 	src="http://postcss.github.io/postcss/logo.svg">
 
-[PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML
-
-> [vue component](https://vue-loader.vuejs.org/) compatible
+[PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML / [Markdown](https://daringfireball.net/projects/markdown/syntax) / [vue component](https://vue-loader.vuejs.org/)
 
 ## Getting Started
 

@@ -1,7 +1,7 @@
 {
   "name": "postcss-html",
-  "version": "0.3.0",
-  "description": "PostCSS Syntax for parsing HTML",
+  "version": "0.4.0",
+  "description": "PostCSS Syntax for parsing HTML / Markdown / Vue Component",
   "main": "lib/index.js",
   "scripts": {
     "coveralls": "coveralls < coverage/lcov.info",
@@ -29,6 +29,7 @@
     "postcss",
     "syntax",
     "html",
+    "markdown",
     "vue",
     "css",
     "less",
@@ -44,7 +45,9 @@
   },
   "homepage": "https://github.com/gucong3000/postcss-html#readme",
   "dependencies": {
-    "htmlparser2": "^3.9.2"
+    "htmlparser2": "^3.9.2",
+    "remark": "^7.0.1",
+    "unist-util-find-all-after": "^1.0.0"
   },
   "peerDependencies": {
     "postcss": ">=5.0.0"
