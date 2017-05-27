@@ -74,7 +74,7 @@ describe('API', () => {
 			syntax.parse('<style>a {</style>', {
 				from: 'SyntaxError.vue',
 			}),
-		]).to.throw(/\bCssSyntaxError:\s+.*:1:8: Unclosed block\n/);
+		]).to.throw(/SyntaxError.vue:1:8: Unclosed block\b/);
 	});
 
 	it('single line with line ending syntax error', () => {
@@ -82,7 +82,7 @@ describe('API', () => {
 			syntax.parse('<style>a {</style>\n', {
 				from: 'SyntaxError.vue',
 			}),
-		]).to.throw(/\bCssSyntaxError:\s+.*:1:8: Unclosed block\n/);
+		]).to.throw(/SyntaxError.vue:1:8: Unclosed block\b/);
 	});
 
 	it('multi line syntax error', () => {
@@ -94,7 +94,7 @@ describe('API', () => {
 			].join('\n'), {
 				from: 'SyntaxError.vue',
 			}),
-		]).to.throw(/\bCssSyntaxError:\s+.*:2:8: Unclosed block\n/);
+		]).to.throw(/SyntaxError.vue:2:8: Unclosed block\b/);
 	});
 
 	it('custom parse error', () => {
