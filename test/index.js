@@ -4,16 +4,24 @@ const cases = require('postcss-parser-tests');
 const expect = require('chai').expect;
 const postcss = require('postcss');
 const syntax = require('../');
+const stripBom = require('strip-bom');
 
 describe('postcss-parser-tests', () => {
 	cases.each( (name, css, ideal) => {
-		it('parses ' + name, () => {
-			const root = syntax.parse(css, {
+
+		it('stringify ' + name, () => {
+			return postcss([
+
+			]).process(css,	{
+				syntax: syntax,
 				from: name,
+			}).then(result => {
+				const json = cases.jsonify(result.root);
+				expect(json).to.equal(ideal);
+				expect(result.content).to.equal(stripBom(css));
 			});
-			const json = cases.jsonify(root);
-			expect(json).to.eql(ideal);
 		});
+
 	});
 });
 
@@ -55,7 +63,7 @@ describe('API', () => {
 	it('config map object', () => {
 		return postcss([
 
-		]).process(html,	{
+		]).process(html, {
 			syntax: syntax({
 				css: postcss,
 				sugarss: 'sugarss',
@@ -68,46 +76,46 @@ describe('API', () => {
 	});
 
 	it('single line syntax error', () => {
-		expect(() => [
+		expect(() => {
 			syntax.parse('<style>a {</style>', {
 				from: 'SyntaxError.vue',
-			}),
-		]).to.throw(/SyntaxError.vue:1:8: Unclosed block\b/);
+			});
+		}).to.throw(/SyntaxError.vue:1:8: Unclosed block\b/);
 	});
 
 	it('single line with line ending syntax error', () => {
-		expect(() => [
+		expect(() => {
 			syntax.parse('<style>a {</style>\n', {
 				from: 'SyntaxError.vue',
-			}),
-		]).to.throw(/SyntaxError.vue:1:8: Unclosed block\b/);
+			});
+		}).to.throw(/SyntaxError.vue:1:8: Unclosed block\b/);
 	});
 
 	it('multi line syntax error', () => {
-		expect(() => [
+		expect(() => {
 			syntax.parse([
 				'<html>',
 				'<style>a {</style>',
 				'</html>',
 			].join('\n'), {
-				from: 'SyntaxError.vue',
-			}),
-		]).to.throw(/SyntaxError.vue:2:8: Unclosed block\b/);
+				from: 'SyntaxError.html',
+			});
+		}).to.throw(/SyntaxError.html:2:8: Unclosed block\b/);
 	});
 
 	it('custom parse error', () => {
-		expect(() => [
+		expect(() => {
 			syntax({
 				parse: function () {
 					throw new TypeError('custom parse error');
 				},
 			}).parse([
 				'<html>',
-				'<style>a {</style>',
+				'<style>a {}</style>',
 				'</html>',
 			].join('\n'), {
-				from: 'SyntaxError.vue',
-			}),
-		]).to.throw('custom parse error');
+				from: 'CustomError.html',
+			});
+		}).to.throw('custom parse error');
 	});
 });

@@ -49,14 +49,8 @@ When passing a non-HTML file, this plugin will infer the syntax by file extensio
 ```js
 var syntax = require('postcss-html');
 postcss(plugins).process(html, {
-	syntax: syntax((opts, lang) => {
-		if ('stylus' === lang) {
-			// Custom syntax by attribute of <style> tag
-			return require('postcss-stylus')
-		} else if (/\.styl$/.test(opts.from)) {
-			// Custom syntax by file extension
-			return require('postcss-stylus')
-		}
+	syntax: syntax({
+		stylus: require('postcss-stylus')
 	})
 }).then(function (result) {
 	result.content

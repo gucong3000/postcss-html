@@ -64,6 +64,7 @@
     "postcss-parser-tests": "^6.0.0",
     "postcss-sass": "^0.1.0",
     "postcss-scss": "^1.0.0",
+    "strip-bom": "^3.0.0",
     "stylelint": "^7.10.1",
     "sugarss": "^1.0.0"
   }

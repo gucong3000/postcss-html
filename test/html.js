@@ -83,4 +83,35 @@ describe('html tests', () => {
 			expect(errors[1].column).to.equal(33);
 		});
 	});
+	it('less', () => {
+		const less = [
+			'<html>',
+			'<head>',
+			'<style type="text/less">',
+			'a {',
+			'\tdisplay: flex;',
+			'}',
+			'</style>',
+			'</head>',
+			'<body>',
+			'<div style="font-family: serif, serif;">',
+			'</div>',
+			'</body>',
+			'</html>',
+		].join('\n');
+		return postcss([
+			root => {
+				expect(root.nodes).to.have.lengthOf(2);
+			},
+		]).process(less, {
+			syntax: syntax({
+				less: {
+					parse: require('postcss-less').parse,
+				},
+			}),
+			from: 'less.html',
+		}).then(result => {
+			expect(result.content).to.equal(less);
+		});
+	});
 });
