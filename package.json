@@ -60,7 +60,7 @@
     "mocha": "^3.4.2",
     "nyc": "^10.3.2",
     "postcss": "^6.0.1",
-    "postcss-less": "^1.0.0",
+    "postcss-less": "^1.0.1",
     "postcss-parser-tests": "^6.0.0",
     "postcss-sass": "^0.1.0",
     "postcss-scss": "^1.0.0",
