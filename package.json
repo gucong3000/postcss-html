@@ -1,6 +1,6 @@
 {
   "name": "postcss-html",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "PostCSS Syntax for parsing HTML / Markdown / Vue Component",
   "main": "lib/index.js",
   "scripts": {
@@ -54,11 +54,11 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
-    "chai": "^4.0.0",
+    "chai": "^4.0.1",
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "mocha": "^3.4.2",
-    "nyc": "^10.3.2",
+    "nyc": "^11.0.1",
     "postcss": "^6.0.1",
     "postcss-less": "^1.0.1",
     "postcss-parser-tests": "^6.0.0",

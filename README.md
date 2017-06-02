@@ -40,9 +40,9 @@ postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
 
 The main use case of this plugin is to apply PostCSS transformations directly to HTML source code. For example, if you ship a theme written in style tag in HTML and need [Autoprefixer](https://github.com/postcss/autoprefixer) to add the appropriate vendor prefixes to it; or you need to lint style source in HTML with a plugin such as [Stylelint](http://stylelint.io/).
 
-### Inferring the syntax of style file
+### Inferring the syntaxes of stylesheet files
 
-When passing a non-HTML file, this plugin will infer the syntax by file extension, and fallback by standard CSS syntax.
+When passing a stylesheet file, syntaxes can automatically be inferred from the following file extensions: `.less`, `.sass`, `.scss`, `.sss` and `.css`.
 
 ### Custom unknown syntax
 
