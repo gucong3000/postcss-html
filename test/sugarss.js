@@ -1,7 +1,6 @@
 'use strict';
 
 const expect = require('chai').expect;
-// const autoprefixer = require('autoprefixer');
 const postcss = require('postcss');
 const syntax = require('../');
 const sugarss = require('sugarss');
@@ -21,7 +20,7 @@ describe('SugarSS tests', () => {
 
 	sss = sss.join('\n');
 
-	it('SugarSS to CSS', () => {
+	it('SugarSS to CSS, `syntax({ sugarss: { parse: sugarss.parse } })`', () => {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(1);
@@ -38,7 +37,7 @@ describe('SugarSS tests', () => {
 		});
 	});
 
-	it('SugarSS to CSS', () => {
+	it('SugarSS to CSS, `syntax({ parse: sugarss.parse })`', () => {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(1);
@@ -52,4 +51,22 @@ describe('SugarSS tests', () => {
 		});
 	});
 
+	it('SugarSS in vue', () => {
+		const vue = [
+			'<style lang="SugarSS">',
+			sss,
+			'</style>',
+		].join('\n');
+		return postcss([
+			root => {
+				expect(root.nodes).to.have.lengthOf(1);
+				root.each(() => false);
+			},
+		]).process(vue, {
+			syntax,
+			from: 'sugarss.vue',
+		}).then(result => {
+			expect(result.content).to.equal(vue);
+		});
+	});
 });
