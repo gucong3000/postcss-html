@@ -1,8 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect;
-// const autoprefixer = require('autoprefixer');
 const postcss = require('postcss');
+const stylefmt = require('stylefmt');
 const syntax = require('../');
 
 describe('markdown tests', () => {
@@ -42,6 +42,39 @@ describe('markdown tests', () => {
 			from: 'lang.vue',
 		}).then(result => {
 			expect(result.content).to.equal(md);
+		});
+	});
+
+	it('stylefmt', function () {
+		const source = [
+			'title: Something Special',
+			'```css',
+			'    .foo {',
+			'    color: pink;',
+			'    }',
+			'      .bar {}',
+			'```',
+			'And the end.',
+		].join('\n');
+		const code = [
+			'title: Something Special',
+			'```css',
+			'    .foo {',
+			'    \tcolor: pink;',
+			'    }',
+			'',
+			'    .bar {',
+			'    }',
+			'```',
+			'And the end.',
+		].join('\n');
+		return postcss([
+			stylefmt,
+		]).process(source, {
+			syntax,
+			from: 'lang.vue',
+		}).then(result => {
+			expect(result.content).to.equal(code);
 		});
 	});
 });
