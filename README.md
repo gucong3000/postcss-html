@@ -9,7 +9,7 @@ PostCSS HTML Syntax
 	title="Philosopher’s stone, logo of PostCSS"
 	src="http://postcss.github.io/postcss/logo.svg">
 
-[PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML / [Markdown](https://daringfireball.net/projects/markdown/syntax) / [vue component](https://vue-loader.vuejs.org/)
+[PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML / [Markdown](https://daringfireball.net/projects/markdown/syntax) / [Vue component](https://vue-loader.vuejs.org/)
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
 
 ### Style Transformations
 
-The main use case of this plugin is to apply PostCSS transformations directly to HTML source code. For example, if you ship a theme written in style tag in HTML and need [Autoprefixer](https://github.com/postcss/autoprefixer) to add the appropriate vendor prefixes to it; or you need to lint style source in HTML with a plugin such as [Stylelint](http://stylelint.io/).
+The main use case of this plugin is to apply PostCSS transformations to HTML / [Markdown](https://daringfireball.net/projects/markdown/syntax) / [Vue component](https://vue-loader.vuejs.org/). For example, if you need to lint SCSS in `*.vue` with [Stylelint](http://stylelint.io/); or you need add vendor prefixes to CSS in `*.html` with [Autoprefixer](https://github.com/postcss/autoprefixer).
 
 ### Inferring the syntaxes of stylesheet files
 
