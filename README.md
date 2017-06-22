@@ -40,9 +40,9 @@ postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
 
 The main use case of this plugin is to apply PostCSS transformations to HTML / [Markdown](https://daringfireball.net/projects/markdown/syntax) / [Vue component](https://vue-loader.vuejs.org/). For example, if you need to lint SCSS in `*.vue` with [Stylelint](http://stylelint.io/); or you need add vendor prefixes to CSS in `*.html` with [Autoprefixer](https://github.com/postcss/autoprefixer).
 
-### Inferring the syntaxes of stylesheet files
+### Syntax Infer for Stylesheet Files
 
-When passing a stylesheet file, syntaxes can automatically be inferred from the following file extensions: `.less`, `.sass`, `.scss`, `.sss` and `.css`.
+When passing a stylesheet file, syntaxe can automatically be inferred from the following file extensions: `.less`, `.sass`, `.scss` and `.sss`, others will be inferred as CSS.
 
 ### Custom unknown syntax
 
