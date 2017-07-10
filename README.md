@@ -19,7 +19,7 @@ First thing's first, install the module:
 npm install postcss-html --save-dev
 ```
 
-If you want support SCSS/SASS/LESS/SugarSS syntaxh, you need to install the corresponding module.
+If you want support SCSS/SASS/LESS/SugarSS syntax, you need to install the corresponding module.
 
 - SCSS: [PostCSS-SCSS](https://github.com/postcss/postcss-scss)
 - SASS: [PostCSS-SASS](https://github.com/aleshaoleg/postcss-sass)
