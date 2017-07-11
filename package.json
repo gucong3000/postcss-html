@@ -53,19 +53,19 @@
     "postcss": ">=5.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.1",
+    "autoprefixer": "^7.1.2",
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
-    "eslint": "^4.0.0",
+    "eslint": "^4.2.0",
     "mocha": "^3.4.2",
-    "nyc": "^11.0.2",
-    "postcss": "^6.0.2",
-    "postcss-less": "^1.0.2",
-    "postcss-parser-tests": "^6.0.0",
-    "postcss-sass": "^0.1.0",
-    "postcss-scss": "^1.0.1",
+    "nyc": "^11.0.3",
+    "postcss": "^6.0.6",
+    "postcss-less": "^1.1.0",
+    "postcss-parser-tests": "^6.0.2",
+    "postcss-sass": "^0.2.0",
+    "postcss-scss": "^1.0.2",
     "strip-bom": "^3.0.0",
-    "stylelint": "^7.11.1",
+    "stylelint": "^7.13.0",
     "sugarss": "^1.0.0"
   }
 }
