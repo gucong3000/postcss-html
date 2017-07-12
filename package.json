@@ -1,6 +1,6 @@
 {
   "name": "postcss-html",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "PostCSS Syntax for parsing HTML / Markdown / Vue Component",
   "main": "lib/index.js",
   "scripts": {
@@ -50,11 +50,15 @@
     "unist-util-find-all-after": "^1.0.1"
   },
   "peerDependencies": {
-    "postcss": ">=5.0.0"
+    "postcss": ">=5.0.0",
+    "postcss-less": ">=1.1.0",
+    "postcss-sass": ">=0.2.0",
+    "postcss-scss": ">=1.0.0",
+    "sugarss": ">=1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "chai": "^4.0.2",
+    "chai": "^4.1.0",
     "coveralls": "^2.13.1",
     "eslint": "^4.2.0",
     "mocha": "^3.4.2",
