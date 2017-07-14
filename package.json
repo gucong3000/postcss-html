@@ -53,6 +53,7 @@
   "peerDependencies": {
     "postcss": ">=5.0.0",
     "postcss-less": ">=1.1.0",
+    "postcss-safe-parser": ">=3.0.0",
     "postcss-sass": ">=0.2.0",
     "postcss-scss": ">=1.0.0",
     "sugarss": ">=1.0.0"
@@ -67,6 +68,7 @@
     "postcss": "^6.0.6",
     "postcss-less": "^1.1.0",
     "postcss-parser-tests": "^6.0.2",
+    "postcss-safe-parser": "^3.0.0",
     "postcss-sass": "^0.2.0",
     "postcss-scss": "^1.0.2",
     "strip-bom": "^3.0.0",
