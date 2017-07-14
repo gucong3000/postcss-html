@@ -1,8 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect;
-const postcss = require('postcss');
 const stylefmt = require('stylefmt');
+const postcss = require('postcss');
 const syntax = require('../');
 
 describe('markdown tests', () => {
@@ -72,9 +72,7 @@ describe('markdown tests', () => {
 			stylefmt,
 		]).process(source, {
 			syntax,
-			html: {
-				reIndent: true,
-			},
+			reIndent: true,
 			from: 'lang.vue',
 		}).then(result => {
 			expect(result.content).to.equal(code);

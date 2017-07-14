@@ -3,6 +3,7 @@
 const expect = require('chai').expect;
 const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
+const stylefmt = require('stylefmt');
 const postcss = require('postcss');
 const syntax = require('../');
 
@@ -103,15 +104,36 @@ describe('html tests', () => {
 			root => {
 				expect(root.nodes).to.have.lengthOf(2);
 			},
+			stylefmt,
 		]).process(less, {
 			syntax: syntax({
 				less: {
 					parse: require('postcss-less').parse,
 				},
 			}),
+			reIndent: true,
 			from: 'less.html',
 		}).then(result => {
 			expect(result.content).to.equal(less);
+		});
+	});
+
+	it('fix css', () => {
+		const css = [
+			'<html>',
+			'<style>',
+			'a {',
+			'\tdisplay: flex;',
+			'</html>',
+		].join('\n');
+		return postcss([
+		]).process(css, {
+			syntax: syntax,
+			fix: true,
+			reIndent: true,
+			from: 'autofix.html',
+		}).then(result => {
+			expect(result.content).to.equal(css);
 		});
 	});
 });
