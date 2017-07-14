@@ -72,6 +72,9 @@ describe('markdown tests', () => {
 			stylefmt,
 		]).process(source, {
 			syntax,
+			html: {
+				reIndent: true,
+			},
 			from: 'lang.vue',
 		}).then(result => {
 			expect(result.content).to.equal(code);

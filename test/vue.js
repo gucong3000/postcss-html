@@ -6,7 +6,7 @@ const postcss = require('postcss');
 const syntax = require('../');
 
 describe('vue tests', () => {
-	it('stylelint', () => {
+	it('autoprefixer', () => {
 		return postcss([
 			autoprefixer({
 				browsers: ['Chrome >= 1'],
