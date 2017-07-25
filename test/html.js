@@ -111,7 +111,6 @@ describe('html tests', () => {
 					parse: require('postcss-less').parse,
 				},
 			}),
-			reIndent: true,
 			from: 'less.html',
 		}).then(result => {
 			expect(result.content).to.equal(less);
@@ -133,7 +132,6 @@ describe('html tests', () => {
 		]).process(css, {
 			syntax: syntax,
 			fix: true,
-			reIndent: true,
 			from: 'autofix.html',
 		}).then(result => {
 			expect(result.content).to.equal([
