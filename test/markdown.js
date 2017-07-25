@@ -59,12 +59,12 @@ describe('markdown tests', () => {
 		const code = [
 			'title: Something Special',
 			'```css',
-			'    .foo {',
-			'    \tcolor: pink;',
-			'    }',
+			'.foo {',
+			'\tcolor: pink;',
+			'}',
 			'',
-			'    .bar {',
-			'    }',
+			'.bar {',
+			'}',
 			'```',
 			'And the end.',
 		].join('\n');

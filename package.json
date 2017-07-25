@@ -45,7 +45,6 @@
   },
   "homepage": "https://github.com/gucong3000/postcss-html#readme",
   "dependencies": {
-    "es6-weak-map": "^2.0.2",
     "htmlparser2": "^3.9.2",
     "remark": "^8.0.0",
     "unist-util-find-all-after": "^1.0.1"
