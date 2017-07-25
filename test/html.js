@@ -127,13 +127,23 @@ describe('html tests', () => {
 			'</html>',
 		].join('\n');
 		return postcss([
+			function (root) {
+				root.last.raws.after = root.last.raws.after.replace(/[\r\n]*$/, '\n');
+			},
 		]).process(css, {
 			syntax: syntax,
 			fix: true,
 			reIndent: true,
 			from: 'autofix.html',
 		}).then(result => {
-			expect(result.content).to.equal(css);
+			expect(result.content).to.equal([
+				'<html>',
+				'<style>',
+				'a {',
+				'\tdisplay: flex;',
+				'}',
+				'</html>',
+			].join('\n'));
 		});
 	});
 });
