@@ -16,6 +16,7 @@ describe('postcss-parser-tests', () => {
 				syntax: syntax,
 				from: name,
 			}).then(result => {
+				// delete result.root.source.syntax;
 				const json = cases.jsonify(result.root);
 				expect(json).to.equal(ideal);
 				expect(result.content).to.equal(stripBom(css));

@@ -46,12 +46,13 @@
   "homepage": "https://github.com/gucong3000/postcss-html#readme",
   "dependencies": {
     "htmlparser2": "^3.9.2",
-    "remark": "^7.0.1",
+    "remark": "^8.0.0",
     "unist-util-find-all-after": "^1.0.1"
   },
   "peerDependencies": {
     "postcss": ">=5.0.0",
     "postcss-less": ">=1.1.0",
+    "postcss-safe-parser": ">=3.0.0",
     "postcss-sass": ">=0.2.0",
     "postcss-scss": ">=1.0.0",
     "sugarss": ">=1.0.0"
@@ -60,16 +61,18 @@
     "autoprefixer": "^7.1.2",
     "chai": "^4.1.0",
     "coveralls": "^2.13.1",
-    "eslint": "^4.2.0",
+    "eslint": "^4.3.0",
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
-    "postcss": "^6.0.6",
+    "postcss": "^6.0.8",
     "postcss-less": "^1.1.0",
     "postcss-parser-tests": "^6.0.2",
+    "postcss-safe-parser": "^3.0.1",
     "postcss-sass": "^0.2.0",
     "postcss-scss": "^1.0.2",
     "strip-bom": "^3.0.0",
-    "stylelint": "^7.13.0",
+    "stylefmt": "^6.0.0",
+    "stylelint": "^8.0.0",
     "sugarss": "^1.0.0"
   }
 }
