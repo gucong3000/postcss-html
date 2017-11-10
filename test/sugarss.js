@@ -1,26 +1,26 @@
-'use strict';
+"use strict";
 
-const expect = require('chai').expect;
-const postcss = require('postcss');
-const syntax = require('../');
-const sugarss = require('sugarss');
+const expect = require("chai").expect;
+const postcss = require("postcss");
+const syntax = require("../");
+const sugarss = require("sugarss");
 
-describe('SugarSS tests', () => {
+describe("SugarSS tests", () => {
 	let sss = [
-		'.one',
-		'\tbackground: linear-gradient(rgba(0, 0, 0, 0), black)',
-		'\t\tlinear-gradient(red, rgba(255, 0, 0, 0))',
+		".one",
+		"\tbackground: linear-gradient(rgba(0, 0, 0, 0), black)",
+		"\t\tlinear-gradient(red, rgba(255, 0, 0, 0))",
 	];
 	const css = [
-		sss[0] + ' {',
+		sss[0] + " {",
 		sss[1],
 		sss[2],
-		'}',
-	].join('\n');
+		"}",
+	].join("\n");
 
-	sss = sss.join('\n');
+	sss = sss.join("\n");
 
-	it('SugarSS to CSS, `syntax({ sugarss: { parse: sugarss.parse } })`', () => {
+	it("SugarSS to CSS, `syntax({ sugarss: { parse: sugarss.parse } })`", () => {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(1);
@@ -31,13 +31,13 @@ describe('SugarSS tests', () => {
 					parse: sugarss.parse,
 				},
 			}),
-			from: 'SugarSS.sss',
+			from: "SugarSS.sss",
 		}).then(result => {
 			expect(result.content).to.equal(css);
 		});
 	});
 
-	it('SugarSS to CSS, `syntax({ parse: sugarss.parse })`', () => {
+	it("SugarSS to CSS, `syntax({ parse: sugarss.parse })`", () => {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(1);
@@ -51,12 +51,12 @@ describe('SugarSS tests', () => {
 		});
 	});
 
-	it('SugarSS in vue', () => {
+	it("SugarSS in vue", () => {
 		const vue = [
-			'<style lang="SugarSS">',
+			"<style lang=\"SugarSS\">",
 			sss,
-			'</style>',
-		].join('\n');
+			"</style>",
+		].join("\n");
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(1);
@@ -64,7 +64,7 @@ describe('SugarSS tests', () => {
 			},
 		]).process(vue, {
 			syntax,
-			from: 'sugarss.vue',
+			from: "sugarss.vue",
 		}).then(result => {
 			expect(result.content).to.equal(vue);
 		});

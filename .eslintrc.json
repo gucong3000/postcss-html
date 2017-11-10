@@ -1,0 +1,95 @@
+{
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "script",
+		"impliedStrict": false
+	},
+	"env": {
+		"es6": true,
+		"node": true
+	},
+	"extends": [
+		"standard"
+	],
+	"root": true,
+	"rules": {
+		"arrow-spacing": [
+			"error",
+			{
+				"after": true,
+				"before": true
+			}
+		],
+		"comma-dangle": [
+			"error",
+			"always-multiline"
+		],
+		"comma-spacing": [
+			"error",
+			{
+				"after": true,
+				"before": false
+			}
+		],
+		"eqeqeq": [
+			"error",
+			"smart"
+		],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
+		"key-spacing": [
+			"error"
+		],
+		"keyword-spacing": [
+			"error"
+		],
+		"no-unused-expressions": [
+			"error"
+		],
+		"no-tabs": [
+			"off"
+		],
+		"no-var": [
+			"error"
+		],
+		"prefer-const": [
+			"error"
+		],
+		"quotes": [
+			"error",
+			"double"
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"space-before-blocks": [
+			"error"
+		],
+		"space-before-function-paren": [
+			"error"
+		],
+		"space-infix-ops": [
+			"error"
+		],
+		"spaced-comment": [
+			"error",
+			"always"
+		],
+		"strict": [
+			"error",
+			"safe"
+		],
+		"valid-jsdoc": [
+			"warn",
+			{
+				"requireReturn": false
+			}
+		]
+	}
+}

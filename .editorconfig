@@ -18,5 +18,5 @@ block_comment_end = */
 [*.{cmd,bat}]
 end_of_line = crlf
 
-[{package.json,.travis.yml,appveyor.yml,.gitlab-ci.yml}]
+[{package.json,*.yml}]
 indent_style = space
