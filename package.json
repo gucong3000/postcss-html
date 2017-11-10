@@ -58,21 +58,21 @@
     "sugarss": ">=1.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.2",
-    "chai": "^4.1.0",
+    "autoprefixer": "^7.1.6",
+    "chai": "^4.1.2",
     "codecov": "^3.0.0",
-    "eslint": "^4.3.0",
-    "mocha": "^3.4.2",
-    "nyc": "^11.0.3",
-    "postcss": "^6.0.8",
-    "postcss-less": "^1.1.0",
-    "postcss-parser-tests": "^6.0.2",
+    "eslint": "^4.10.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "postcss": "^6.0.14",
+    "postcss-less": "^1.1.2",
+    "postcss-parser-tests": "^6.1.0",
     "postcss-safe-parser": "^3.0.1",
     "postcss-sass": "^0.2.0",
     "postcss-scss": "^1.0.2",
     "strip-bom": "^3.0.0",
     "stylefmt": "^6.0.0",
-    "stylelint": "^8.0.0",
-    "sugarss": "^1.0.0"
+    "stylelint": "^8.2.0",
+    "sugarss": "^1.0.1"
   }
 }
