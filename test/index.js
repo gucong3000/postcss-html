@@ -7,8 +7,7 @@ const syntax = require('../');
 const stripBom = require('strip-bom');
 
 describe('postcss-parser-tests', () => {
-	cases.each( (name, css, ideal) => {
-
+	cases.each((name, css, ideal) => {
 		it('stringify ' + name, () => {
 			return postcss([
 
@@ -22,7 +21,6 @@ describe('postcss-parser-tests', () => {
 				expect(result.content).to.equal(stripBom(css));
 			});
 		});
-
 	});
 });
 
