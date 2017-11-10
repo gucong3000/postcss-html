@@ -71,7 +71,7 @@ describe("vue tests", () => {
 			syntax,
 			from: "empty.vue",
 		}).then(result => {
-			expect(result.root.nodes).to.have.lengthOf(0);
+			expect(result.root.nodes).to.have.lengthOf(2);
 		});
 	});
 	it("vue with lang(s)", () => {

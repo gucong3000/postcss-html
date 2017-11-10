@@ -144,4 +144,236 @@ describe("html tests", () => {
 			].join("\n"));
 		});
 	});
+
+	it("stringify for append node", () => {
+		const css = [
+			"<html>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			function (root) {
+				root.append({
+					selector: "b",
+				});
+			},
+		]).process(css, {
+			syntax: syntax,
+			from: "inserted.html",
+		}).then(result => {
+			expect(result.content).to.equal([
+				"<html>",
+				"<style>",
+				"a {",
+				"\tdisplay: flex;",
+				"}",
+				"b {}",
+				"</style>",
+				"</html>",
+			].join("\n"));
+		});
+	});
+
+	it("stringify for prepend node", () => {
+		const css = [
+			"<html>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			function (root) {
+				root.prepend({
+					selector: "b",
+				});
+			},
+		]).process(css, {
+			syntax: syntax,
+			from: "prepend.html",
+		}).then(result => {
+			expect(result.content).to.equal([
+				"<html>",
+				"<style>",
+				"b {}",
+				"a {",
+				"\tdisplay: flex;",
+				"}",
+				"</style>",
+				"</html>",
+			].join("\n"));
+		});
+	});
+
+	it("stringify for insertBefore node", () => {
+		const css = [
+			"<html>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			function (root) {
+				root.insertBefore(root.last, {
+					selector: "b",
+				});
+			},
+		]).process(css, {
+			syntax: syntax,
+			from: "insertBefore.html",
+		}).then(result => {
+			expect(result.content).to.equal([
+				"<html>",
+				"<style>",
+				"a {",
+				"\tdisplay: flex;",
+				"}",
+				"</style>",
+				"<style>",
+				"b {}",
+				"a {",
+				"\tdisplay: flex;",
+				"}",
+				"</style>",
+				"</html>",
+			].join("\n"));
+		});
+	});
+
+	it("stringify for insertAfter node", () => {
+		const css = [
+			"<html>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			function (root) {
+				root.insertAfter(root.first, {
+					selector: "b",
+				});
+			},
+		]).process(css, {
+			syntax: syntax,
+			from: "insertAfter.html",
+		}).then(result => {
+			expect(result.content).to.equal([
+				"<html>",
+				"<style>",
+				"a {",
+				"\tdisplay: flex;",
+				"}",
+				"b {}",
+				"</style>",
+				"<style>",
+				"a {",
+				"\tdisplay: flex;",
+				"}",
+				"</style>",
+				"</html>",
+			].join("\n"));
+		});
+	});
+
+	it("stringify for unshift node", () => {
+		const css = [
+			"<html>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			function (root) {
+				root.nodes.unshift(postcss.parse("b {}"));
+			},
+		]).process(css, {
+			syntax: syntax,
+			from: "unshift.html",
+		}).then(result => {
+			expect(result.content).to.equal([
+				"<html>",
+				"<style>",
+				"b {}a {",
+				"\tdisplay: flex;",
+				"}",
+				"</style>",
+				"</html>",
+			].join("\n"));
+		});
+	});
+
+	it("stringify for push node", () => {
+		const css = [
+			"<html>",
+			"<style>",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			function (root) {
+				root.nodes.push(postcss.parse("b {}"));
+			},
+		]).process(css, {
+			syntax: syntax,
+			from: "push.html",
+		}).then(result => {
+			expect(result.content).to.equal([
+				"<html>",
+				"<style>",
+				"a {",
+				"\tdisplay: flex;",
+				"}",
+				"b {}</style>",
+				"</html>",
+			].join("\n"));
+		});
+	});
+
+	it("stringify for node aray", () => {
+		const css = [
+			"<html>",
+			"<style>",
+			"</style>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			function (root) {
+				root.nodes = [postcss.parse("b {}")];
+			},
+		]).process(css, {
+			syntax: syntax,
+			from: "push.html",
+		}).then(result => {
+			/* eslint-disable no-unused-expressions */
+			expect(result.content).to.be.ok;
+		});
+	});
 });
