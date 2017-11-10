@@ -4,7 +4,7 @@
   "description": "PostCSS Syntax for parsing HTML / Markdown / Vue Component",
   "main": "lib/index.js",
   "scripts": {
-    "coveralls": "coveralls < coverage/lcov.info",
+    "report-coverage": "codecov",
     "pretest": "eslint lib test",
     "test": "nyc mocha"
   },
@@ -60,7 +60,7 @@
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "chai": "^4.1.0",
-    "coveralls": "^2.13.1",
+    "codecov": "^3.0.0",
     "eslint": "^4.3.0",
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
