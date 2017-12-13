@@ -39,7 +39,7 @@ describe("markdown tests", () => {
 			},
 		]).process(md, {
 			syntax,
-			from: "lang.vue",
+			from: "lang.md",
 		}).then(result => {
 			expect(result.content).to.equal(md);
 		});
@@ -72,7 +72,7 @@ describe("markdown tests", () => {
 			stylefmt,
 		]).process(source, {
 			syntax,
-			from: "lang.vue",
+			from: "lang.md",
 		}).then(result => {
 			expect(result.content).to.equal(code);
 		});

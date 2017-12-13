@@ -117,4 +117,68 @@ describe("API", () => {
 			});
 		}).to.throw("custom parse error");
 	});
+
+	it("Not parse HTML in comments without filename", () => {
+		return postcss([
+
+		]).process(
+			[
+				"\t/*",
+				"\tWrite this in a comment:",
+				"\t<div style=\"display: flex; flex-direction: row\">",
+				"\t*/",
+			].join("\n"), {
+				syntax: syntax,
+			}
+		).then(result => {
+			expect(result.root.nodes).to.have.lengthOf(1);
+			expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
+		});
+	});
+
+	[
+		"css",
+		"pcss",
+		"postcss",
+	].forEach(extName => {
+		it("Not parse HTML in comments for `*." + extName + "`", () => {
+			return postcss([
+
+			]).process(
+				[
+					"/*",
+					" * <div style=\"display: flex; flex-direction: row\">",
+					" */",
+				].join("\n"), {
+					syntax: syntax,
+					from: "comment." + extName,
+				}
+			).then(result => {
+				expect(result.root.nodes).to.have.lengthOf(1);
+				expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
+			});
+		});
+	});
+
+	[
+		"scss",
+		"less",
+		"sss",
+	].forEach(extName => {
+		it("Not parse HTML in comments for `*." + extName + "`", () => {
+			return postcss([
+
+			]).process(
+				[
+					"// <div style=\"display: flex; flex-direction: row\">",
+				].join("\n"), {
+					syntax: syntax,
+					from: "comment." + extName,
+				}
+			).then(result => {
+				expect(result.root.nodes).to.have.lengthOf(1);
+				expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
+			});
+		});
+	});
 });
