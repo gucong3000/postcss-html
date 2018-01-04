@@ -129,6 +129,7 @@ describe("API", () => {
 				"\t*/",
 			].join("\n"), {
 				syntax: syntax,
+				from: undefined,
 			}
 		).then(result => {
 			expect(result.root.nodes).to.have.lengthOf(1);
