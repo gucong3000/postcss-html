@@ -39,9 +39,22 @@ describe("markdown tests", () => {
 			},
 		]).process(md, {
 			syntax,
-			from: "lang.md",
+			from: "markdown.md",
 		}).then(result => {
 			expect(result.content).to.equal(md);
+		});
+	});
+
+	it("Without code blocks", function () {
+		return postcss([
+			root => {
+				expect(root.nodes).to.have.lengthOf(0);
+			},
+		]).process("# Hi\n", {
+			syntax,
+			from: "without_code_blocks.md",
+		}).then(result => {
+			expect(result.content).to.equal("# Hi\n");
 		});
 	});
 
@@ -72,7 +85,7 @@ describe("markdown tests", () => {
 			stylefmt,
 		]).process(source, {
 			syntax,
-			from: "lang.md",
+			from: "stylefmt.md",
 		}).then(result => {
 			expect(result.content).to.equal(code);
 		});
