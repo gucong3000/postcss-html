@@ -118,7 +118,7 @@ describe("API", () => {
 		}).to.throw("custom parse error");
 	});
 
-	it("Not parse HTML in comments without filename", () => {
+	it("Not parse HTML in multiline comments without filename", () => {
 		return postcss([
 
 		]).process(
@@ -139,10 +139,25 @@ describe("API", () => {
 
 	[
 		"css",
+		// PostCSS
 		"pcss",
 		"postcss",
+		// We Chat mini program
+		"wxss",
+		// Alipay mini program
+		"acss",
+		// SASS
+		"sass",
+		"scss",
+		// LESS
+		"less",
+		// SugarSS
+		"sss",
+		// Stylus
+		"styl",
+		"stylus",
 	].forEach(extName => {
-		it("Not parse HTML in comments for `*." + extName + "`", () => {
+		it("Not parse HTML in multiline comments for `*." + extName + "`", () => {
 			return postcss([
 
 			]).process(
@@ -162,11 +177,15 @@ describe("API", () => {
 	});
 
 	[
+		// SASS
+		"sass",
 		"scss",
+		// LESS
 		"less",
+		// SugarSS
 		"sss",
 	].forEach(extName => {
-		it("Not parse HTML in comments for `*." + extName + "`", () => {
+		it("Not parse HTML in single-line comments for `*." + extName + "`", () => {
 			return postcss([
 
 			]).process(

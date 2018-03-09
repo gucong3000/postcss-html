@@ -46,6 +46,7 @@ describe("SugarSS tests", () => {
 			syntax: syntax({
 				parse: sugarss.parse,
 			}),
+			from: "SugarSS.sss",
 		}).then(result => {
 			expect(result.content).to.equal(css);
 		});
