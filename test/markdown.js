@@ -45,7 +45,30 @@ describe("markdown tests", () => {
 		});
 	});
 
-	it("Without code blocks", function () {
+	it("empty code block", () => {
+		const source = [
+			"hi",
+			"",
+			"```css",
+			"",
+			"```",
+			"",
+		].join("\n");
+		return postcss([
+			root => {
+				const css = root.nodes[0].source;
+				console.log(css);
+				expect(css.input.css).equal("\n");
+				expect(css.start.line).equal(4);
+				expect(css.start.column).equal(1);
+			},
+		]).process(source, {
+			syntax: syntax,
+			from: "empty_code_block.md",
+		});
+	});
+
+	it("without code blocks", function () {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(0);
