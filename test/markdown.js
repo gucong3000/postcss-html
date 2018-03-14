@@ -57,7 +57,6 @@ describe("markdown tests", () => {
 		return postcss([
 			root => {
 				const css = root.nodes[0].source;
-				console.log(css);
 				expect(css.input.css).equal("\n");
 				expect(css.start.line).equal(4);
 				expect(css.start.column).equal(1);
