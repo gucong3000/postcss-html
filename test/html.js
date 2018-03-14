@@ -103,14 +103,11 @@ describe("html tests", () => {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(2);
+				expect(root.toString()).equal(less);
 			},
 			stylefmt,
 		]).process(less, {
-			syntax: syntax({
-				less: {
-					parse: require("postcss-less").parse,
-				},
-			}),
+			syntax: syntax(),
 			from: "less.html",
 		}).then(result => {
 			expect(result.content).to.equal(less);
