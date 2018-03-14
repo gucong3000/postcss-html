@@ -62,8 +62,7 @@ describe("vue tests", () => {
 		});
 	});
 	it("vue with empty <style>", () => {
-		return postcss([
-		]).process([
+		return postcss().process([
 			"<style module=\"style\"></style>",
 			"<style scoped lang=\"stylus\" module>",
 			"</style>",

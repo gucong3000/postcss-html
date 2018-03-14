@@ -8,6 +8,14 @@ const postcss = require("postcss");
 const syntax = require("../");
 
 describe("html tests", () => {
+	it("Invalid HTML", () => {
+		return postcss().process("<", {
+			syntax: syntax,
+			from: "invalid.html",
+		}).then(result => {
+			expect(result.content).to.equal("<");
+		});
+	});
 	it("autoprefixer", () => {
 		return postcss([
 			autoprefixer({
