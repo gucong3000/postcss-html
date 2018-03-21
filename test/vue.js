@@ -28,8 +28,8 @@ describe("vue tests", () => {
 			".red",
 			"  color: red",
 			"</style>",
-			"<script>",
-			"module.exports = {}",
+			"<script lang='coffee'>",
+			"should skip coffeescript)))",
 			"</script>",
 		].join("\n"), {
 			syntax,
@@ -55,8 +55,8 @@ describe("vue tests", () => {
 				".red",
 				"  color: red",
 				"</style>",
-				"<script>",
-				"module.exports = {}",
+				"<script lang='coffee'>",
+				"should skip coffeescript)))",
 				"</script>",
 			].join("\n"));
 		});

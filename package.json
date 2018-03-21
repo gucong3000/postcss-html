@@ -1,6 +1,6 @@
 {
   "name": "postcss-html",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "PostCSS Syntax for parsing HTML / Markdown / Vue Component",
   "main": "lib/index.js",
   "scripts": {
@@ -45,6 +45,9 @@
   },
   "homepage": "https://github.com/gucong3000/postcss-html#readme",
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/traverse": "^7.0.0-beta.42",
+    "babylon": "^7.0.0-beta.42",
     "htmlparser2": "^3.9.2",
     "remark": "^9.0.0",
     "unist-util-find-all-after": "^1.0.1"

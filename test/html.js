@@ -92,6 +92,7 @@ describe("html tests", () => {
 			expect(errors[1].column).to.equal(33);
 		});
 	});
+
 	it("less", () => {
 		const less = [
 			"<html>",
@@ -119,6 +120,94 @@ describe("html tests", () => {
 			from: "less.html",
 		}).then(result => {
 			expect(result.content).to.equal(less);
+		});
+	});
+
+	it("javascript in html", () => {
+		const code = [
+			"<script>",
+			"  function test() {",
+			"    return `",
+			"      <style>",
+			"        .selector {",
+			"          --property: value;",
+			"        }",
+			"      </style>",
+			"    `;",
+			"  }",
+			"</script>",
+			"",
+		].join("\n");
+		return postcss([
+			root => {
+				expect(root.nodes).to.have.lengthOf(1);
+				expect(root.first.nodes).to.have.lengthOf(1);
+				expect(root.first.first).to.have.property("selector", ".selector");
+			},
+		]).process(code, {
+			syntax: syntax(),
+			from: "html_in_js_in_html.html",
+		}).then(result => {
+			expect(result.content).to.equal(code);
+		});
+	});
+
+	it("less", () => {
+		const less = [
+			"<html>",
+			"<head>",
+			"<style type=\"text/less\">",
+			"a {",
+			"\tdisplay: flex;",
+			"}",
+			"</style>",
+			"</head>",
+			"<body>",
+			"<div style=\"font-family: serif, serif;\">",
+			"</div>",
+			"</body>",
+			"</html>",
+		].join("\n");
+		return postcss([
+			root => {
+				expect(root.nodes).to.have.lengthOf(2);
+				expect(root.toString()).equal(less);
+			},
+			stylefmt,
+		]).process(less, {
+			syntax: syntax(),
+			from: "less.html",
+		}).then(result => {
+			expect(result.content).to.equal(less);
+		});
+	});
+
+	it("javascript module in html", () => {
+		const code = [
+			"<script type='module'>",
+			"  function test() {",
+			"    return `",
+			"      <style>",
+			"        .selector {",
+			"          --property: value;",
+			"        }",
+			"      </style>",
+			"    `;",
+			"  }",
+			"</script>",
+			"",
+		].join("\n");
+		return postcss([
+			root => {
+				expect(root.nodes).to.have.lengthOf(1);
+				expect(root.first.nodes).to.have.lengthOf(1);
+				expect(root.first.first).to.have.property("selector", ".selector");
+			},
+		]).process(code, {
+			syntax: syntax(),
+			from: "html_in_js_in_html.html",
+		}).then(result => {
+			expect(result.content).to.equal(code);
 		});
 	});
 
