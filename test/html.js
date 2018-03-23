@@ -432,7 +432,7 @@ describe("html tests", () => {
 			"</html>",
 		].join("\n");
 		return postcss([
-			function (root) {
+			root => {
 				root.nodes.push(postcss.parse("b {}"));
 			},
 		]).process(css, {
@@ -451,7 +451,7 @@ describe("html tests", () => {
 		});
 	});
 
-	it("stringify for node aray", () => {
+	it("stringify for nodes array", () => {
 		const css = [
 			"<html>",
 			"<style>",
@@ -459,7 +459,7 @@ describe("html tests", () => {
 			"</html>",
 		].join("\n");
 		return postcss([
-			function (root) {
+			root => {
 				root.nodes = [postcss.parse("b {}")];
 			},
 		]).process(css, {
@@ -468,6 +468,21 @@ describe("html tests", () => {
 		}).then(result => {
 			/* eslint-disable no-unused-expressions */
 			expect(result.content).to.be.ok;
+		});
+	});
+
+	it("<style> tag in last line", () => {
+		const css = [
+			"\n<style>b{}</style>",
+		].join("\n");
+		return postcss([
+		]).process(css, {
+			syntax: syntax,
+			from: "push.html",
+		}).then(result => {
+			expect(result.root.nodes).to.be.lengthOf(1);
+			expect(result.root.first.source.start.line).to.equal(2);
+			expect(result.root.first.source.start.column).to.equal(8);
 		});
 	});
 });
