@@ -1,6 +1,5 @@
 {
 	"parserOptions": {
-		"ecmaVersion": 6,
 		"sourceType": "script",
 		"impliedStrict": false
 	},
@@ -13,16 +12,15 @@
 	],
 	"root": true,
 	"rules": {
-		"arrow-spacing": [
-			"error",
-			{
-				"after": true,
-				"before": true
-			}
-		],
 		"comma-dangle": [
 			"error",
-			"always-multiline"
+			{
+				"arrays": "always-multiline",
+				"objects": "always-multiline",
+				"imports": "always-multiline",
+				"exports": "always-multiline",
+				"functions": "never"
+			}
 		],
 		"comma-spacing": [
 			"error",
@@ -31,10 +29,6 @@
 				"before": false
 			}
 		],
-		"eqeqeq": [
-			"error",
-			"smart"
-		],
 		"indent": [
 			"error",
 			"tab",
@@ -42,19 +36,13 @@
 				"SwitchCase": 1
 			}
 		],
-		"key-spacing": [
-			"error"
-		],
-		"keyword-spacing": [
-			"error"
-		],
-		"no-unused-expressions": [
-			"error"
-		],
 		"no-tabs": [
 			"off"
 		],
 		"no-var": [
+			"error"
+		],
+		"prefer-arrow-callback": [
 			"error"
 		],
 		"prefer-const": [
@@ -66,30 +54,14 @@
 		],
 		"semi": [
 			"error",
-			"always"
-		],
-		"space-before-blocks": [
-			"error"
-		],
-		"space-before-function-paren": [
-			"error"
-		],
-		"space-infix-ops": [
-			"error"
-		],
-		"spaced-comment": [
-			"error",
-			"always"
+			"always",
+			{
+				"omitLastInOneLineBlock": false
+			}
 		],
 		"strict": [
 			"error",
 			"safe"
-		],
-		"valid-jsdoc": [
-			"warn",
-			{
-				"requireReturn": false
-			}
 		]
 	},
 	"overrides": [
