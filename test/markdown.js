@@ -32,7 +32,7 @@ describe("markdown tests", () => {
 		"And the end.",
 	].join("\n");
 
-	it("CSS", function () {
+	it("CSS", () => {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(4);
@@ -67,7 +67,7 @@ describe("markdown tests", () => {
 		});
 	});
 
-	it("without code blocks", function () {
+	it("without code blocks", () => {
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(0);
@@ -80,7 +80,7 @@ describe("markdown tests", () => {
 		});
 	});
 
-	it("stylefmt", function () {
+	it("stylefmt", () => {
 		const source = [
 			"title: Something Special",
 			"```css",
