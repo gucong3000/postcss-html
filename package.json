@@ -1,12 +1,12 @@
 {
   "name": "postcss-html",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "PostCSS Syntax for parsing HTML / Markdown / Vue Component",
   "main": "lib/index.js",
   "scripts": {
     "report-coverage": "codecov",
     "pretest": "eslint lib test",
-    "test": "nyc mocha"
+    "test": "nyc mocha --no-timeouts"
   },
   "nyc": {
     "lines": 100,

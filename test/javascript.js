@@ -53,9 +53,16 @@ describe("javascript tests", () => {
 	});
 
 	it("skip javascript syntax error", () => {
-		const jsParser = require("../lib/js-parser");
-		expect(jsParser("(", {
+		const code = "(";
+		return postcss([
+			root => {
+				expect(root.nodes).to.have.lengthOf(0);
+			},
+		]).process(code, {
+			syntax: syntax,
 			from: "syntax_error.js",
-		})).to.have.lengthOf(0);
+		}).then(result => {
+			expect(result.content).to.equal(code);
+		});
 	});
 });

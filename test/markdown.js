@@ -67,6 +67,19 @@ describe("markdown tests", () => {
 		});
 	});
 
+	it("empty file", () => {
+		return postcss([
+			root => {
+				expect(root.nodes).have.lengthOf(0);
+			},
+		]).process("", {
+			syntax: syntax,
+			from: "empty_file.md",
+		}).then(result => {
+			expect(result.content).to.equal("");
+		});
+	});
+
 	it("without code blocks", () => {
 		return postcss([
 			root => {
