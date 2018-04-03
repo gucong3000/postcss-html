@@ -3,22 +3,40 @@
 const expect = require("chai").expect;
 const postcss = require("postcss");
 const syntax = require("../");
+const fs = require("fs");
+
+/* eslint-disable */
+function testcase () {
+	// `
+	// 	<style>
+	// 		.selector {
+	// 		property: value;
+	// 		}
+	// 	</style>
+	// `
+	/*
+	`
+		<style>
+			.selector {
+			property: value;
+			}
+		</style>
+	`
+	*/
+	"\""
+	return `
+		<style>
+			.selector {
+			property: value;
+			}
+		</style>
+	`;
+}
+/* eslint-enable */
 
 describe("javascript tests", () => {
 	it("html in template literal", () => {
-		const code = [
-			"import * as postcss from 'postcss';",
-			"function test() {",
-			"  return `",
-			"    <style>",
-			"      .selector {",
-			"        property: value;",
-			"      }",
-			"    </style>",
-			"  `;",
-			"}",
-			"",
-		].join("\n");
+		const code = fs.readFileSync(__filename, "utf8");
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(1);
@@ -53,7 +71,7 @@ describe("javascript tests", () => {
 	});
 
 	it("skip javascript syntax error", () => {
-		const code = "(";
+		const code = "\\`";
 		return postcss([
 			root => {
 				expect(root.nodes).to.have.lengthOf(0);
