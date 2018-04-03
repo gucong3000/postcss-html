@@ -443,4 +443,23 @@ describe("html tests", () => {
 			expect(result.root.first.source.start.column).to.equal(8);
 		});
 	});
+	it("react inline styles", () => {
+		const css = `
+			<div style={divStyle}/>
+			<div style={{ height: '10%' }}/>
+			<div style={{height: '10%'}}/>
+			<div style={createMarkup()}/>
+			<div style = {divStyle} />
+			<div style = {{ height: '10%' }} />
+			<div style = {{height: '10%'}} />
+			<div style = {createMarkup()} />
+		`;
+		return postcss([
+		]).process(css, {
+			syntax: syntax,
+			from: "react_inline_styles.html",
+		}).then(result => {
+			expect(result.root.nodes).to.be.lengthOf(0);
+		});
+	});
 });
