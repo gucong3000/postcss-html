@@ -24,13 +24,18 @@ function testcase () {
 	`
 	*/
 	"\""
-	return `
+	const html = `
 		<style>
-			.selector {
-			property: value;
+			.selector1 {
+				property: value;
 			}
 		</style>
-	`;
+`;
+	const CSS = `
+	.selector2 {
+		property: value;
+	}
+`;
 }
 /* eslint-enable */
 
@@ -39,9 +44,11 @@ describe("javascript tests", () => {
 		const code = fs.readFileSync(__filename, "utf8");
 		return postcss([
 			root => {
-				expect(root.nodes).to.have.lengthOf(1);
+				expect(root.nodes).to.have.lengthOf(2);
 				expect(root.first.nodes).to.have.lengthOf(1);
-				expect(root.first.first).to.have.property("selector", ".selector");
+				expect(root.last.nodes).to.have.lengthOf(1);
+				expect(root.first.first).to.have.property("selector", ".selector1");
+				expect(root.last.first).to.have.property("selector", ".selector2");
 			},
 		]).process(code, {
 			syntax: syntax,
@@ -54,6 +61,7 @@ describe("javascript tests", () => {
 	it("empty template literal", () => {
 		const code = [
 			"function test() {",
+			"  console.log(`debug`)",
 			"  return ``;",
 			"}",
 			"",
