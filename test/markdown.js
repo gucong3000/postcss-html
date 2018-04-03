@@ -1,7 +1,6 @@
 "use strict";
 
 const expect = require("chai").expect;
-const stylefmt = require("stylefmt");
 const postcss = require("postcss");
 const syntax = require("../");
 
@@ -90,39 +89,6 @@ describe("markdown tests", () => {
 			from: "without_code_blocks.md",
 		}).then(result => {
 			expect(result.content).to.equal("# Hi\n");
-		});
-	});
-
-	it("stylefmt", () => {
-		const source = [
-			"title: Something Special",
-			"```css",
-			"    .foo {",
-			"    color: pink;",
-			"    }",
-			"      .bar {}",
-			"```",
-			"And the end.",
-		].join("\n");
-		const code = [
-			"title: Something Special",
-			"```css",
-			".foo {",
-			"\tcolor: pink;",
-			"}",
-			"",
-			".bar {",
-			"}",
-			"```",
-			"And the end.",
-		].join("\n");
-		return postcss([
-			stylefmt,
-		]).process(source, {
-			syntax,
-			from: "stylefmt.md",
-		}).then(result => {
-			expect(result.content).to.equal(code);
 		});
 	});
 });
