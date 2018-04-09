@@ -1,7 +1,7 @@
 {
   "name": "postcss-html",
   "version": "0.20.0",
-  "description": "PostCSS Syntax for parsing HTML (and HTML-like)",
+  "description": "PostCSS syntax for parsing HTML (and HTML-like)",
   "main": "lib/index.js",
   "scripts": {
     "report-coverage": "codecov",
@@ -29,8 +29,9 @@
     "postcss",
     "syntax",
     "html",
-    "markdown",
     "vue",
+    "quickapp",
+    "PHP",
     "css",
     "less",
     "sass",

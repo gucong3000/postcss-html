@@ -10,7 +10,7 @@ PostCSS HTML Syntax
 	title="Philosopher’s stone, logo of PostCSS"
 	src="http://postcss.github.io/postcss/logo.svg">
 
-[PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML (and HTML-like)
+[PostCSS](https://github.com/postcss/postcss) syntax for parsing HTML (and HTML-like)
 - [PHP](http://php.net)
 - [Vue component](https://vue-loader.vuejs.org/)
 - [Quick App](https://doc.quickapp.cn/framework/source-file.html)
