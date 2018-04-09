@@ -5,6 +5,8 @@ const expect = require("chai").expect;
 const postcss = require("postcss");
 const syntax = require("../");
 const stripBom = require("strip-bom");
+const getSyntax = require("../lib/get-syntax");
+const cssSyntax = require("../lib/css-syntax");
 
 describe("postcss-parser-tests", () => {
 	cases.each((name, css, ideal) => {
@@ -118,87 +120,9 @@ describe("API", () => {
 		}).to.throw("custom parse error");
 	});
 
-	it("Not parse HTML in multiline comments without filename", () => {
-		return postcss([
-
-		]).process(
-			[
-				"\t/*",
-				"\tWrite this in a comment:",
-				"\t<div style=\"display: flex; flex-direction: row\">",
-				"\t*/",
-			].join("\n"), {
-				syntax: syntax,
-				from: undefined,
-			}
-		).then(result => {
-			expect(result.root.nodes).to.have.lengthOf(1);
-			expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
-		});
-	});
-
-	[
-		"css",
-		// PostCSS
-		"pcss",
-		"postcss",
-		// We Chat mini program
-		"wxss",
-		// Alipay mini program
-		"acss",
-		// SASS
-		"sass",
-		"scss",
-		// LESS
-		"less",
-		// SugarSS
-		"sss",
-		// Stylus
-		"styl",
-		"stylus",
-	].forEach(extName => {
-		it("Not parse HTML in multiline comments for `*." + extName + "`", () => {
-			return postcss([
-
-			]).process(
-				[
-					"/*",
-					" * <div style=\"display: flex; flex-direction: row\">",
-					" */",
-				].join("\n"), {
-					syntax: syntax,
-					from: "comment." + extName,
-				}
-			).then(result => {
-				expect(result.root.nodes).to.have.lengthOf(1);
-				expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
-			});
-		});
-	});
-
-	[
-		// SASS
-		"sass",
-		"scss",
-		// LESS
-		"less",
-		// SugarSS
-		"sss",
-	].forEach(extName => {
-		it("Not parse HTML in single-line comments for `*." + extName + "`", () => {
-			return postcss([
-
-			]).process(
-				[
-					"// <div style=\"display: flex; flex-direction: row\">",
-				].join("\n"), {
-					syntax: syntax,
-					from: "comment." + extName,
-				}
-			).then(result => {
-				expect(result.root.nodes).to.have.lengthOf(1);
-				expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
-			});
-		});
+	it("get-syntax", () => {
+		expect(getSyntax({
+			syntax: {},
+		})).to.deep.equal(cssSyntax({}));
 	});
 });
