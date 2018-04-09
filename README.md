@@ -10,13 +10,10 @@ PostCSS HTML Syntax
 	title="Philosopher’s stone, logo of PostCSS"
 	src="http://postcss.github.io/postcss/logo.svg">
 
-[PostCSS](https://github.com/postcss/postcss) Syntax for parsing:
-- HTML (and HTML-like)
-  - [PHP](http://php.net)
-  - [Vue component](https://vue-loader.vuejs.org/)
-  - [Quick App](https://doc.quickapp.cn/framework/source-file.html)
-- [styled components](https://www.styled-components.com)
-- [Markdown](https://daringfireball.net/projects/markdown/syntax)
+[PostCSS](https://github.com/postcss/postcss) Syntax for parsing HTML (and HTML-like)
+- [PHP](http://php.net)
+- [Vue component](https://vue-loader.vuejs.org/)
+- [Quick App](https://doc.quickapp.cn/framework/source-file.html)
 
 ## Getting Started
 
@@ -36,7 +33,12 @@ If you want support SCSS/SASS/LESS/SugarSS syntax, you need to install the corre
 ## Use Cases
 
 ```js
-var syntax = require('postcss-html');
+var syntax = require('postcss-html')({
+	sass: require('postcss-sass'),
+	scss: require('postcss-scss'),
+	less: require('postcss-less'),
+	sugarss: require('sugarss'),
+});
 postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
 	// An alias for the result.css property. Use it with syntaxes that generate non-CSS output.
 	result.content
@@ -45,7 +47,7 @@ postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
 
 ### Style Transformations
 
-The main use case of this plugin is to apply PostCSS transformations to HTML / [Markdown](https://daringfireball.net/projects/markdown/syntax) / [Vue component](https://vue-loader.vuejs.org/). For example, if you need to lint SCSS in `*.vue` with [Stylelint](http://stylelint.io/); or you need add vendor prefixes to CSS in `*.html` with [Autoprefixer](https://github.com/postcss/autoprefixer).
+The main use case of this plugin is to apply PostCSS transformations to HTML (and HTML-like). For example, if you need to lint SCSS in `*.vue` with [Stylelint](http://stylelint.io/); or you need add vendor prefixes to CSS in `*.html` with [Autoprefixer](https://github.com/postcss/autoprefixer).
 
 ### Syntax Infer for Stylesheet Files
 

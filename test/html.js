@@ -82,35 +82,6 @@ describe("html tests", () => {
 		});
 	});
 
-	it("javascript in html", () => {
-		const code = [
-			"<script>",
-			"  function test() {",
-			"    return `",
-			"      <style>",
-			"        .selector {",
-			"          --property: value;",
-			"        }",
-			"      </style>",
-			"    `;",
-			"  }",
-			"</script>",
-			"",
-		].join("\n");
-		return postcss([
-			root => {
-				expect(root.nodes).to.have.lengthOf(1);
-				expect(root.first.nodes).to.have.lengthOf(1);
-				expect(root.first.first).to.have.property("selector", ".selector");
-			},
-		]).process(code, {
-			syntax: syntax(),
-			from: "html_in_js_in_html.html",
-		}).then(result => {
-			expect(result.content).to.equal(code);
-		});
-	});
-
 	it("less", () => {
 		const less = [
 			"<html>",
@@ -137,35 +108,6 @@ describe("html tests", () => {
 			from: "less.html",
 		}).then(result => {
 			expect(result.content).to.equal(less);
-		});
-	});
-
-	it("javascript module in html", () => {
-		const code = [
-			"<script type='module'>",
-			"  function test() {",
-			"    return `",
-			"      <style>",
-			"        .selector {",
-			"          --property: value;",
-			"        }",
-			"      </style>",
-			"    `;",
-			"  }",
-			"</script>",
-			"",
-		].join("\n");
-		return postcss([
-			root => {
-				expect(root.nodes).to.have.lengthOf(1);
-				expect(root.first.nodes).to.have.lengthOf(1);
-				expect(root.first.first).to.have.property("selector", ".selector");
-			},
-		]).process(code, {
-			syntax: syntax(),
-			from: "html_in_js_in_html.html",
-		}).then(result => {
-			expect(result.content).to.equal(code);
 		});
 	});
 
@@ -443,6 +385,7 @@ describe("html tests", () => {
 			expect(result.root.first.source.start.column).to.equal(8);
 		});
 	});
+
 	it("react inline styles", () => {
 		const css = `
 			<div style={divStyle}/>
@@ -460,6 +403,24 @@ describe("html tests", () => {
 			from: "react_inline_styles.html",
 		}).then(result => {
 			expect(result.root.nodes).to.be.lengthOf(0);
+		});
+	});
+
+	it("Not parse HTML in multiline comments without filename", () => {
+		return postcss([
+
+		]).process(
+			[
+				"\t/*",
+				"\tWrite this in a comment:",
+				"\t<div style=\"display: flex; flex-direction: row\">",
+				"\t*/",
+			].join("\n"), {
+				syntax: syntax,
+				from: undefined,
+			}
+		).then(result => {
+			expect(result.root.nodes).to.have.lengthOf(0);
 		});
 	});
 });
