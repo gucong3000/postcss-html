@@ -420,7 +420,8 @@ describe("html tests", () => {
 				from: undefined,
 			}
 		).then(result => {
-			expect(result.root.nodes).to.have.lengthOf(0);
+			expect(result.root.nodes).to.have.lengthOf(1);
+			expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
 		});
 	});
 });
