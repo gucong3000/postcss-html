@@ -3,7 +3,9 @@
 const expect = require("chai").expect;
 const autoprefixer = require("autoprefixer");
 const postcss = require("postcss");
-const syntax = require("../");
+const syntax = require("../")({
+	stylus: "css",
+});
 
 describe("vue tests", () => {
 	it("autoprefixer", () => {
@@ -103,15 +105,10 @@ describe("vue tests", () => {
 			"}",
 			"</style>",
 		].join("\n");
-		return postcss([
-			root => {
-				expect(root.nodes).to.have.lengthOf(2);
-			},
-		]).process(vue, {
-			syntax,
+		const root = syntax.parse(vue, {
 			from: "lang.vue",
-		}).then(result => {
-			expect(result.content).to.equal(vue);
 		});
+		expect(root.nodes).to.have.lengthOf(2);
+		expect(root.toString()).to.equal(vue);
 	});
 });

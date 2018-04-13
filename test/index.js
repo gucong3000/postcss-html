@@ -1,30 +1,8 @@
 "use strict";
 
-const cases = require("postcss-parser-tests");
 const expect = require("chai").expect;
 const postcss = require("postcss");
 const syntax = require("../");
-const stripBom = require("strip-bom");
-const getSyntax = require("../lib/get-syntax");
-const cssSyntax = require("../lib/css-syntax");
-
-describe("postcss-parser-tests", () => {
-	cases.each((name, css, ideal) => {
-		it("stringify " + name, () => {
-			return postcss([
-
-			]).process(css,	{
-				syntax: syntax,
-				from: name,
-			}).then(result => {
-				// delete result.root.source.syntax;
-				const json = cases.jsonify(result.root);
-				expect(json).to.equal(ideal);
-				expect(result.content).to.equal(stripBom(css));
-			});
-		});
-	});
-});
 
 describe("API", () => {
 	const html = [
@@ -40,26 +18,6 @@ describe("API", () => {
 		"a {}",
 		"</style>",
 	].join("\n");
-
-	it("config callback", () => {
-		const args = [];
-		return postcss([
-
-		]).process(html,	{
-			syntax: syntax((options, lang) => {
-				args.push(lang);
-				if (!lang || lang === "css") {
-					return postcss;
-				}
-			}),
-			from: "api.vue",
-		}).then(result => {
-			expect(result.root.nodes).to.have.lengthOf(3);
-			expect(args[0]).to.equal("less");
-			expect(args[1]).to.equal("sugarss");
-			expect(args[2]).to.equal("css");
-		});
-	});
 
 	it("config map object", () => {
 		return postcss([
@@ -107,8 +65,10 @@ describe("API", () => {
 	it("custom parse error", () => {
 		expect(() => {
 			syntax({
-				parse: function () {
-					throw new TypeError("custom parse error");
+				css: {
+					parse: function () {
+						throw new TypeError("custom parse error");
+					},
 				},
 			}).parse([
 				"<html>",
@@ -118,11 +78,5 @@ describe("API", () => {
 				from: "CustomError.html",
 			});
 		}).to.throw("custom parse error");
-	});
-
-	it("get-syntax", () => {
-		expect(getSyntax({
-			syntax: {},
-		})).to.deep.equal(cssSyntax({}));
 	});
 });

@@ -1,7 +1,6 @@
 "use strict";
 
 const expect = require("chai").expect;
-const autoprefixer = require("autoprefixer");
 const postcss = require("postcss");
 const syntax = require("../");
 
@@ -14,47 +13,9 @@ describe("html tests", () => {
 			expect(result.content).to.equal("<");
 		});
 	});
-	it("autoprefixer", () => {
-		return postcss([
-			autoprefixer({
-				browsers: ["Chrome >= 1"],
-			}),
-		]).process([
-			"<html>",
-			"<head>",
-			"<style>",
-			"a {",
-			"\tdisplay: flex;",
-			"}",
-			"</style>",
-			"</head>",
-			"<body>",
-			"</body>",
-			"</html>",
-		].join("\n"), {
-			syntax,
-			from: "autoprefixer.html",
-		}).then(result => {
-			expect(result.content).to.equal([
-				"<html>",
-				"<head>",
-				"<style>",
-				"a {",
-				"\tdisplay: -webkit-box;",
-				"\tdisplay: -webkit-flex;",
-				"\tdisplay: flex;",
-				"}",
-				"</style>",
-				"</head>",
-				"<body>",
-				"</body>",
-				"</html>",
-			].join("\n"));
-		});
-	});
 
 	it("less", () => {
-		const less = [
+		const html = [
 			"<html>",
 			"<head>",
 			"<style type=\"text/less\">",
@@ -69,78 +30,15 @@ describe("html tests", () => {
 			"</body>",
 			"</html>",
 		].join("\n");
-		return postcss([
-			root => {
-				expect(root.nodes).to.have.lengthOf(2);
-				expect(root.toString()).equal(less);
-			},
-		]).process(less, {
-			syntax: syntax(),
+		const root = syntax.parse(html, {
 			from: "less.html",
-		}).then(result => {
-			expect(result.content).to.equal(less);
 		});
-	});
-
-	it("less", () => {
-		const less = [
-			"<html>",
-			"<head>",
-			"<style type=\"text/less\">",
-			"a {",
-			"\tdisplay: flex;",
-			"}",
-			"</style>",
-			"</head>",
-			"<body>",
-			"<div style=\"font-family: serif, serif;\">",
-			"</div>",
-			"</body>",
-			"</html>",
-		].join("\n");
-		return postcss([
-			root => {
-				expect(root.nodes).to.have.lengthOf(2);
-				expect(root.toString()).equal(less);
-			},
-		]).process(less, {
-			syntax: syntax(),
-			from: "less.html",
-		}).then(result => {
-			expect(result.content).to.equal(less);
-		});
-	});
-
-	it("fix css", () => {
-		const css = [
-			"<html>",
-			"<style>",
-			"a {",
-			"\tdisplay: flex;",
-			"</html>",
-		].join("\n");
-		return postcss([
-			function (root) {
-				root.last.raws.after = root.last.raws.after.replace(/[\r\n]*$/, "\n");
-			},
-		]).process(css, {
-			syntax: syntax,
-			fix: true,
-			from: "autofix.html",
-		}).then(result => {
-			expect(result.content).to.equal([
-				"<html>",
-				"<style>",
-				"a {",
-				"\tdisplay: flex;",
-				"}",
-				"</html>",
-			].join("\n"));
-		});
+		expect(root.nodes).to.have.lengthOf(2);
+		expect(root.toString()).equal(html);
 	});
 
 	it("stringify for append node", () => {
-		const css = [
+		const html = [
 			"<html>",
 			"<style>",
 			"a {",
@@ -155,9 +53,9 @@ describe("html tests", () => {
 					selector: "b",
 				});
 			},
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
-			from: "inserted.html",
+			from: "append.html",
 		}).then(result => {
 			expect(result.content).to.equal([
 				"<html>",
@@ -173,7 +71,7 @@ describe("html tests", () => {
 	});
 
 	it("stringify for prepend node", () => {
-		const css = [
+		const html = [
 			"<html>",
 			"<style>",
 			"a {",
@@ -188,7 +86,7 @@ describe("html tests", () => {
 					selector: "b",
 				});
 			},
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "prepend.html",
 		}).then(result => {
@@ -206,7 +104,7 @@ describe("html tests", () => {
 	});
 
 	it("stringify for insertBefore node", () => {
-		const css = [
+		const html = [
 			"<html>",
 			"<style>",
 			"a {",
@@ -226,13 +124,14 @@ describe("html tests", () => {
 					selector: "b",
 				});
 			},
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "insertBefore.html",
 		}).then(result => {
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
+				"b {}",
 				"a {",
 				"\tdisplay: flex;",
 				"}",
@@ -249,7 +148,7 @@ describe("html tests", () => {
 	});
 
 	it("stringify for insertAfter node", () => {
-		const css = [
+		const html = [
 			"<html>",
 			"<style>",
 			"a {",
@@ -269,7 +168,7 @@ describe("html tests", () => {
 					selector: "b",
 				});
 			},
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "insertAfter.html",
 		}).then(result => {
@@ -285,6 +184,7 @@ describe("html tests", () => {
 				"a {",
 				"\tdisplay: flex;",
 				"}",
+				"b {}",
 				"</style>",
 				"</html>",
 			].join("\n"));
@@ -292,7 +192,7 @@ describe("html tests", () => {
 	});
 
 	it("stringify for unshift node", () => {
-		const css = [
+		const html = [
 			"<html>",
 			"<style>",
 			"a {",
@@ -305,7 +205,7 @@ describe("html tests", () => {
 			function (root) {
 				root.nodes.unshift(postcss.parse("b {}"));
 			},
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "unshift.html",
 		}).then(result => {
@@ -322,7 +222,7 @@ describe("html tests", () => {
 	});
 
 	it("stringify for push node", () => {
-		const css = [
+		const html = [
 			"<html>",
 			"<style>",
 			"a {",
@@ -331,11 +231,12 @@ describe("html tests", () => {
 			"</style>",
 			"</html>",
 		].join("\n");
+
 		return postcss([
 			root => {
 				root.nodes.push(postcss.parse("b {}"));
 			},
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "push.html",
 		}).then(result => {
@@ -344,15 +245,15 @@ describe("html tests", () => {
 				"<style>",
 				"a {",
 				"\tdisplay: flex;",
-				"}",
-				"b {}</style>",
+				"}b {}",
+				"</style>",
 				"</html>",
 			].join("\n"));
 		});
 	});
 
 	it("stringify for nodes array", () => {
-		const css = [
+		const html = [
 			"<html>",
 			"<style>",
 			"</style>",
@@ -362,21 +263,25 @@ describe("html tests", () => {
 			root => {
 				root.nodes = [postcss.parse("b {}")];
 			},
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "push.html",
 		}).then(result => {
-			/* eslint-disable no-unused-expressions */
-			expect(result.content).to.be.ok;
+			expect(result.content).to.equal([
+				"<html>",
+				"<style>",
+				"b {}</style>",
+				"</html>",
+			].join("\n"));
 		});
 	});
 
 	it("<style> tag in last line", () => {
-		const css = [
+		const html = [
 			"\n<style>b{}</style>",
 		].join("\n");
 		return postcss([
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "push.html",
 		}).then(result => {
@@ -387,7 +292,7 @@ describe("html tests", () => {
 	});
 
 	it("react inline styles", () => {
-		const css = `
+		const html = `
 			<div style={divStyle}/>
 			<div style={{ height: '10%' }}/>
 			<div style={{height: '10%'}}/>
@@ -398,30 +303,11 @@ describe("html tests", () => {
 			<div style = {createMarkup()} />
 		`;
 		return postcss([
-		]).process(css, {
+		]).process(html, {
 			syntax: syntax,
 			from: "react_inline_styles.html",
 		}).then(result => {
 			expect(result.root.nodes).to.be.lengthOf(0);
-		});
-	});
-
-	it("Not parse HTML in multiline comments without filename", () => {
-		return postcss([
-
-		]).process(
-			[
-				"\t/*",
-				"\tWrite this in a comment:",
-				"\t<div style=\"display: flex; flex-direction: row\">",
-				"\t*/",
-			].join("\n"), {
-				syntax: syntax,
-				from: undefined,
-			}
-		).then(result => {
-			expect(result.root.nodes).to.have.lengthOf(1);
-			expect(result.root.nodes[0]).to.have.property("type").to.equal("comment");
 		});
 	});
 });
