@@ -48,6 +48,10 @@ If you want support SCSS/SASS/LESS/SugarSS syntax, you need to install these mod
 - LESS: [PostCSS-LESS](https://github.com/shellscape/postcss-less)
 - SugarSS: [SugarSS](https://github.com/postcss/sugarss)
 
+## Advanced Use Cases
+
+See: [postcss-syntax](https://github.com/gucong3000/postcss-syntax)
+
 ### Style Transformations
 
 The main use case of this plugin is to apply PostCSS transformations to `<style>` tags and `<div style="*">` property in HTML (and HTML-like).
