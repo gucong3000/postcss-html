@@ -22,13 +22,6 @@
 				"functions": "never"
 			}
 		],
-		"comma-spacing": [
-			"error",
-			{
-				"after": true,
-				"before": false
-			}
-		],
 		"indent": [
 			"error",
 			"tab",
@@ -71,6 +64,9 @@
 			],
 			"env": {
 				"mocha": true
+			},
+			"rules": {
+				"no-template-curly-in-string": "off"
 			}
 		}
 	]
