@@ -46,16 +46,16 @@
   },
   "homepage": "https://github.com/gucong3000/postcss-html#readme",
   "dependencies": {
-    "htmlparser2": "^3.9.2",
-    "postcss-syntax": "*"
+    "htmlparser2": "^3.9.2"
   },
   "peerDependencies": {
-    "postcss": ">=5.0.0"
+    "postcss": ">=5.0.0",
+    "postcss-syntax": "*"
   },
   "devDependencies": {
     "autoprefixer": "^8.3.0",
     "chai": "^4.1.2",
-    "codecov": "^3.0.0",
+    "codecov": "^3.0.1",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.11.0",
