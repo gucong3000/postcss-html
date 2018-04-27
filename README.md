@@ -20,7 +20,7 @@ PostCSS HTML Syntax
 First thing's first, install the module:
 
 ```
-npm install postcss-html --save-dev
+npm install postcss-syntax postcss-html --save-dev
 ```
 
 ## Use Cases
