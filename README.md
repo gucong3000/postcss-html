@@ -23,6 +23,13 @@ First thing's first, install the module:
 npm install postcss-syntax postcss-html --save-dev
 ```
 
+If you want support SCSS/SASS/LESS/SugarSS syntax, you need to install the corresponding module.
+
+- SCSS: [postcss-scss](https://github.com/postcss/postcss-scss)
+- SASS: [postcss-sass](https://github.com/aleshaoleg/postcss-sass)
+- LESS: [postcss-less](https://github.com/shellscape/postcss-less)
+- SugarSS: [sugarss](https://github.com/postcss/sugarss)
+
 ## Use Cases
 
 ```js
