@@ -3,6 +3,7 @@ PostCSS HTML Syntax
 
 [![NPM version](https://img.shields.io/npm/v/postcss-html.svg?style=flat-square)](https://www.npmjs.com/package/postcss-html)
 [![Travis](https://img.shields.io/travis/gucong3000/postcss-html.svg)](https://travis-ci.org/gucong3000/postcss-html)
+[![Travis](https://img.shields.io/travis/gucong3000/postcss-syntaxes.svg?label=integration)](https://travis-ci.org/gucong3000/postcss-syntaxes)
 [![Codecov](https://img.shields.io/codecov/c/github/gucong3000/postcss-html.svg)](https://codecov.io/gh/gucong3000/postcss-html)
 [![David](https://img.shields.io/david/gucong3000/postcss-html.svg)](https://david-dm.org/gucong3000/postcss-html)
 
