@@ -51,10 +51,10 @@ postcss(plugins).process(source, { syntax: syntax }).then(function (result) {
 
 If you want support SCSS/SASS/LESS/SugarSS syntax, you need to install these module:
 
-- SCSS: [PostCSS-SCSS](https://github.com/postcss/postcss-scss)
-- SASS: [PostCSS-SASS](https://github.com/aleshaoleg/postcss-sass)
-- LESS: [PostCSS-LESS](https://github.com/shellscape/postcss-less)
-- SugarSS: [SugarSS](https://github.com/postcss/sugarss)
+- SCSS: [postcss-scss](https://github.com/postcss/postcss-scss)
+- SASS: [postcss-sass](https://github.com/aleshaoleg/postcss-sass)
+- LESS: [postcss-less](https://github.com/shellscape/postcss-less)
+- SugarSS: [sugarss](https://github.com/postcss/sugarss)
 
 ## Advanced Use Cases
 
