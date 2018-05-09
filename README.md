@@ -13,7 +13,7 @@ PostCSS HTML Syntax
 
 [PostCSS](https://github.com/postcss/postcss) syntax for parsing HTML (and HTML-like)
 - [PHP](http://php.net)
-- [Vue component](https://vue-loader.vuejs.org/)
+- [Vue Single-File Component](https://vue-loader.vuejs.org/spec.html)
 - [Quick App](https://doc.quickapp.cn/framework/source-file.html)
 
 ## Getting Started
