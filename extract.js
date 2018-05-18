@@ -1,18 +1,22 @@
 "use strict";
 
 const htmlparser = require("htmlparser2");
+const loadSyntax = require("postcss-syntax/load-syntax");
 
 function iterateCode (source, onStyleTag, onStyleAttribute) {
-	const currentTag = {};
+	let style;
+	const openTag = {};
 
 	const parser = new htmlparser.Parser({
 		onopentag (name, attribute) {
 			// Test if current tag is a valid <style> tag.
-			if (!/^style$/i.test(name) || attribute.src || attribute.href) {
+			if (!/^style$/i.test(name)) {
+				openTag[name] = true;
 				return;
 			}
 
-			currentTag[name] = {
+			style = {
+				inHtml: openTag.html,
 				tagName: name,
 				attribute,
 				startIndex: parser.endIndex + 1,
@@ -20,20 +24,40 @@ function iterateCode (source, onStyleTag, onStyleAttribute) {
 		},
 
 		onclosetag (name) {
-			const tag = currentTag[name];
-			if (!tag) {
+			if (name !== "style" || !style) {
+				openTag[name] = false;
 				return;
 			}
-			currentTag[name] = null;
-			tag.content = source.slice(tag.startIndex, parser.startIndex);
-			onStyleTag(tag);
+
+			let content = source.slice(style.startIndex, parser.startIndex);
+
+			const firstNewLine = /^[ \t]*\r?\n/.exec(content);
+			if (firstNewLine) {
+				const offset = firstNewLine[0].length;
+				style.startIndex += offset;
+				content = content.slice(offset);
+			}
+			style.content = content.replace(/[ \t]*$/, "");
+
+			onStyleTag(style);
+			style = null;
 		},
 
-		onattribute (name, value) {
+		onattribute (name, content) {
 			if (name !== "style") {
 				return;
 			}
-			onStyleAttribute(value, parser._tokenizer._index);
+			const endIndex = parser._tokenizer._index;
+			const startIndex = endIndex - content.length;
+			if (source[startIndex - 1] !== source[endIndex] || !/\S/.test(source[endIndex])) {
+				return;
+			}
+			onStyleAttribute({
+				content,
+				startIndex,
+				inline: true,
+				inTemplate: openTag.template,
+			});
 		},
 	});
 
@@ -53,27 +77,27 @@ function getLang (attribute) {
 
 function htmlParser (source, opts, styles) {
 	styles = styles || [];
+
+	const standard = opts.from && /\.(?:[sx]?html?|[sx]ht|markdown|md)$/i.test(opts.from);
+
 	function onStyleTag (style) {
-		const firstNewLine = /^[ \t]*\r?\n/.exec(style.content);
-		style.lang = getLang(style.attribute);
-		if (firstNewLine) {
-			const offset = firstNewLine[0].length;
-			style.startIndex += offset;
-			style.content = style.content.slice(offset);
+		if (!(style.inHtml || standard) && (style.attribute.src || style.attribute.href) && !style.content.trim()) {
+			return;
 		}
-		style.content = style.content.replace(/[ \t]*$/, "");
+		style.lang = getLang(style.attribute);
 		styles.push(style);
 	}
-	function onStyleAttribute (content, endIndex) {
-		const startIndex = endIndex - content.length;
-		if (source[startIndex - 1] === source[endIndex] && /\S/.test(source[endIndex])) {
-			styles.push({
-				content: content,
-				startIndex,
-				inline: true,
-			});
+
+	function onStyleAttribute (style) {
+		if (style.inTemplate && /\{\{[\s\S]*?\}\}/g.test(style.content)) {
+			style.syntax = loadSyntax(opts, __dirname);
+			style.lang = "custom-template";
+		} else {
+			style.lang = "css";
 		}
+		styles.push(style);
 	}
+
 	iterateCode(source, onStyleTag, onStyleAttribute);
 
 	return styles;
