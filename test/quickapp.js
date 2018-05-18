@@ -14,7 +14,7 @@ describe("Quick App tests", () => {
 
 		].join("\n"), {
 			syntax,
-			from: "quickapp.vue",
+			from: "quickapp.ux",
 		}).then(result => {
 			expect(result.root.nodes).to.have.lengthOf(2);
 			expect(result.root.first.source).to.have.property("lang", "custom-template");
@@ -45,7 +45,7 @@ describe("Quick App tests", () => {
 			syntax: syntax({
 				css: "postcss-safe-parser",
 			}),
-			from: "quickapp.vue",
+			from: "quickapp.ux",
 		}).then(result => {
 			expect(result.root.nodes).to.have.lengthOf(1);
 			const root = result.root.first;
