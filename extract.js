@@ -8,7 +8,7 @@ function iterateCode (source, onStyleTag, onStyleAttribute) {
 	const parser = new htmlparser.Parser({
 		onopentag (name, attribute) {
 			// Test if current tag is a valid <style> tag.
-			if (!/^style$/i.test(name)) {
+			if (!/^style$/i.test(name) || attribute.src || attribute.href) {
 				return;
 			}
 

@@ -68,6 +68,7 @@ describe("vue tests", () => {
 			"<style module=\"style\"></style>",
 			"<style scoped lang=\"stylus\" module>",
 			"</style>",
+			"<style src=\"./style.css\"></style>",
 		].join("\n"), {
 			syntax,
 			from: "empty.vue",
