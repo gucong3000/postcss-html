@@ -24,7 +24,7 @@ function iterateCode (source, onStyleTag, onStyleAttribute) {
 		},
 
 		onclosetag (name) {
-			if (name !== "style" || !style) {
+			if (!style || name !== style.tagName) {
 				openTag[name] = false;
 				return;
 			}
@@ -78,7 +78,7 @@ function getLang (attribute) {
 function htmlParser (source, opts, styles) {
 	styles = styles || [];
 
-	const standard = opts.from && /\.(?:[sx]?html?|[sx]ht|markdown|md)$/i.test(opts.from);
+	const standard = opts.from && /\.(?:\w*html?|x(?:ht|ml|slt?)|markdown|md)$/i.test(opts.from);
 
 	function onStyleTag (style) {
 		if (!(style.inHtml || standard) && (style.attribute.src || style.attribute.href) && !style.content.trim()) {
