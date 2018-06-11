@@ -15,6 +15,7 @@ PostCSS HTML Syntax
 - [PHP](http://php.net)
 - [Vue Single-File Component](https://vue-loader.vuejs.org/spec.html)
 - [Quick App](https://doc.quickapp.cn/framework/source-file.html)
+- [XSLT](https://www.w3.org/TR/xslt-30/)
 
 ## Getting Started
 
