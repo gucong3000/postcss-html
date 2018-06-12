@@ -16,6 +16,8 @@ function iterateCode (source, onStyleTag, onStyleAttribute) {
 			}
 
 			style = {
+				inXsls: openTag["xsl:stylesheet"],
+				inXslt: openTag["xsl:template"],
 				inHtml: openTag.html,
 				tagName: name,
 				attribute,
@@ -81,7 +83,7 @@ function htmlParser (source, opts, styles) {
 	const standard = opts.from && /\.(?:\w*html?|x(?:ht|ml|slt?)|markdown|md)$/i.test(opts.from);
 
 	function onStyleTag (style) {
-		if (!(style.inHtml || standard) && (style.attribute.src || style.attribute.href) && !style.content.trim()) {
+		if (!(style.inHtml || style.inXsls || style.inXslt || standard) && (style.attribute.src || style.attribute.href) && !style.content.trim()) {
 			return;
 		}
 		style.lang = getLang(style.attribute);
