@@ -6,12 +6,13 @@ const syntax = require("../");
 
 describe("html tests", () => {
 	it("Invalid HTML", () => {
-		return postcss().process("<", {
-			syntax: syntax,
+		const html = "<";
+		const document = syntax.parse(html, {
 			from: "invalid.html",
-		}).then(result => {
-			expect(result.content).to.equal("<");
 		});
+		expect(document.source).to.haveOwnProperty("lang", "html");
+		expect(document.nodes).to.have.lengthOf(0);
+		expect(document.toString()).equal(html);
 	});
 
 	it("less", () => {
@@ -30,11 +31,12 @@ describe("html tests", () => {
 			"</body>",
 			"</html>",
 		].join("\n");
-		const root = syntax.parse(html, {
+		const document = syntax.parse(html, {
 			from: "less.html",
 		});
-		expect(root.nodes).to.have.lengthOf(2);
-		expect(root.toString()).equal(html);
+		expect(document.source).to.haveOwnProperty("lang", "html");
+		expect(document.nodes).to.have.lengthOf(2);
+		expect(document.toString()).equal(html);
 	});
 
 	it("stringify for append node", () => {
@@ -57,6 +59,7 @@ describe("html tests", () => {
 			syntax: syntax,
 			from: "append.html",
 		}).then(result => {
+			expect(result.root.source).to.haveOwnProperty("lang", "html");
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
@@ -90,6 +93,7 @@ describe("html tests", () => {
 			syntax: syntax,
 			from: "prepend.html",
 		}).then(result => {
+			expect(result.root.source).to.haveOwnProperty("lang", "html");
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
@@ -128,6 +132,7 @@ describe("html tests", () => {
 			syntax: syntax,
 			from: "insertBefore.html",
 		}).then(result => {
+			expect(result.root.source).to.haveOwnProperty("lang", "html");
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
@@ -172,6 +177,7 @@ describe("html tests", () => {
 			syntax: syntax,
 			from: "insertAfter.html",
 		}).then(result => {
+			expect(result.root.source).to.haveOwnProperty("lang", "html");
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
@@ -209,6 +215,7 @@ describe("html tests", () => {
 			syntax: syntax,
 			from: "unshift.html",
 		}).then(result => {
+			expect(result.root.source).to.haveOwnProperty("lang", "html");
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
@@ -240,6 +247,7 @@ describe("html tests", () => {
 			syntax: syntax,
 			from: "push.html",
 		}).then(result => {
+			expect(result.root.source).to.haveOwnProperty("lang", "html");
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
@@ -267,6 +275,7 @@ describe("html tests", () => {
 			syntax: syntax,
 			from: "push.html",
 		}).then(result => {
+			expect(result.root.source).to.haveOwnProperty("lang", "html");
 			expect(result.content).to.equal([
 				"<html>",
 				"<style>",
@@ -277,18 +286,15 @@ describe("html tests", () => {
 	});
 
 	it("<style> tag in last line", () => {
-		const html = [
-			"\n<style>b{}</style>",
-		].join("\n");
-		return postcss([
-		]).process(html, {
-			syntax: syntax,
-			from: "push.html",
-		}).then(result => {
-			expect(result.root.nodes).to.be.lengthOf(1);
-			expect(result.root.first.source.start.line).to.equal(2);
-			expect(result.root.first.source.start.column).to.equal(8);
+		const html = "\n<style>b{}</style>";
+		const document = syntax.parse(html, {
+			from: "style_tag_in_last_line.html",
 		});
+		expect(document.source).to.haveOwnProperty("lang", "html");
+		expect(document.nodes).to.be.lengthOf(1);
+		expect(document.toString()).equal(html);
+		expect(document.first.source.start.line).to.equal(2);
+		expect(document.first.source.start.column).to.equal(8);
 	});
 
 	it("react inline styles", () => {
@@ -302,12 +308,11 @@ describe("html tests", () => {
 			<div style = {{height: '10%'}} />
 			<div style = {createMarkup()} />
 		`;
-		return postcss([
-		]).process(html, {
-			syntax: syntax,
+		const document = syntax.parse(html, {
 			from: "react_inline_styles.html",
-		}).then(result => {
-			expect(result.root.nodes).to.be.lengthOf(0);
 		});
+		expect(document.source).to.haveOwnProperty("lang", "html");
+		expect(document.nodes).to.be.lengthOf(0);
+		expect(document.toString()).equal(html);
 	});
 });
