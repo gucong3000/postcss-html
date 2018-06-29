@@ -80,7 +80,7 @@ function getLang (attribute) {
 function htmlParser (source, opts, styles) {
 	styles = styles || [];
 
-	const standard = opts.from && /\.(?:\w*html?|x(?:ht|ml|slt?)|markdown|md)$/i.test(opts.from);
+	const standard = opts.from && /\.(?:\w*html?|xht|xslt?|jsp|aspx?|ejs|php\d*|twig|liquid|m(?:ark)?d(?:ow)?n|mk?d)$/i.test(opts.from);
 
 	function onStyleTag (style) {
 		if (!(style.inHtml || style.inXsls || style.inXslt || standard) && (style.attribute.src || style.attribute.href) && !style.content.trim()) {
@@ -91,10 +91,11 @@ function htmlParser (source, opts, styles) {
 	}
 
 	function onStyleAttribute (style) {
-		if (style.inTemplate && /\{\{[\s\S]*?\}\}/g.test(style.content)) {
+		if (/{[\s\S]*?}/g.test(style.content)) {
 			style.syntax = loadSyntax(opts, __dirname);
 			style.lang = "custom-template";
 		} else {
+			// style.ignoreErrors = opts.from && /\.(?:jsp|aspx?|ejs|php\d*|twig)$/i.test(opts.from);
 			style.lang = "css";
 		}
 		styles.push(style);
