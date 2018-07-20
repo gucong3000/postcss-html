@@ -61,6 +61,18 @@ If you want support SCSS/SASS/LESS/SugarSS syntax, you need to install these mod
 
 See: [postcss-syntax](https://github.com/gucong3000/postcss-syntax)
 
-### Style Transformations
+## Turning PostCSS off from within your HTML
+
+PostCSS can be temporarily turned off by using special comments in your HTML. For example:
+
+```html
+<html>
+<body>
+<!-- postcss-disable -->
+<a style="color: red;"></a>
+<!-- postcss-enable -->
+```
+
+## Style Transformations
 
 The main use case of this plugin is to apply PostCSS transformations to `<style>` tags and `<div style="*">` property in HTML (and HTML-like).
