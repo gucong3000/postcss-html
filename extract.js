@@ -4,14 +4,27 @@ const htmlparser = require("htmlparser2");
 const loadSyntax = require("postcss-syntax/load-syntax");
 
 function iterateCode (source, onStyleTag, onStyleAttribute) {
-	let style;
 	const openTag = {};
+	let disable;
+	let style;
 
 	const parser = new htmlparser.Parser({
+		oncomment: (data) => {
+			if (!/(?:^|\s+)postcss-(\w+)(?:\s+|$)/i.test(data)) {
+				return;
+			}
+			data = RegExp.$1.toLowerCase();
+			if (data === "enable") {
+				disable = false;
+			} else if (data === "disable") {
+				disable = true;
+			}
+		},
 		onopentag (name, attribute) {
+			openTag[name] = true;
+
 			// Test if current tag is a valid <style> tag.
 			if (!/^style$/i.test(name)) {
-				openTag[name] = true;
 				return;
 			}
 
@@ -26,8 +39,8 @@ function iterateCode (source, onStyleTag, onStyleAttribute) {
 		},
 
 		onclosetag (name) {
-			if (!style || name !== style.tagName) {
-				openTag[name] = false;
+			openTag[name] = false;
+			if (disable || !style || name !== style.tagName) {
 				return;
 			}
 
@@ -46,7 +59,7 @@ function iterateCode (source, onStyleTag, onStyleAttribute) {
 		},
 
 		onattribute (name, content) {
-			if (name !== "style") {
+			if (disable || name !== "style") {
 				return;
 			}
 			const endIndex = parser._tokenizer._index;
