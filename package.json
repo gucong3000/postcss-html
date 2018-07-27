@@ -1,6 +1,6 @@
 {
   "name": "postcss-html",
-  "version": "0.31.0",
+  "version": "0.32.0",
   "description": "PostCSS syntax for parsing HTML (and HTML-like)",
   "repository": {
     "type": "git",
@@ -43,19 +43,19 @@
   },
   "peerDependencies": {
     "postcss": ">=5.0.0",
-    "postcss-syntax": ">=0.31.0"
+    "postcss-syntax": ">=0.32.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.0.0",
+    "autoprefixer": "^9.0.1",
     "chai": "^4.1.2",
     "codecov": "^3.0.4",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
-    "postcss": "^7.0.0",
+    "postcss": "^7.0.1",
     "postcss-less": "^2.0.0",
     "postcss-safe-parser": "^4.0.1",
     "postcss-scss": "^2.0.0",
-    "postcss-syntax": ">=0.31.0",
+    "postcss-syntax": ">=0.32.0",
     "sugarss": "^1.0.1"
   }
 }
