@@ -111,7 +111,7 @@ describe("template interpolation", () => {
 	it("Svelte", () => {
 		const document = syntax.parse(
 			[
-				"<a style=\"display: {dynamicProperties}\">",
+				"<a style=\"display: { dynamicProperties }\">",
 				"</a>",
 			].join("\n"), {
 				from: "quickapp.ux",
@@ -125,6 +125,6 @@ describe("template interpolation", () => {
 			expect(node).to.have.property("type", "decl");
 		});
 		expect(root.first).to.have.property("prop", "display");
-		expect(root.first).to.have.property("value", "{dynamicProperties}");
+		expect(root.first).to.have.property("value", "{ dynamicProperties }");
 	});
 });
