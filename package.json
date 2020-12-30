@@ -41,7 +41,7 @@
     "debug": "npm run mocha -- --inspect-brk"
   },
   "dependencies": {
-    "htmlparser2": "^3.10.0"
+    "htmlparser2": "^6.0.0"
   },
   "peerDependencies": {
     "postcss": ">=5.0.0",
@@ -50,9 +50,9 @@
   "devDependencies": {
     "autoprefixer": "^9.4.3",
     "chai": "^4.2.0",
-    "codecov": "^3.1.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
+    "codecov": "^3.8.1",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
     "postcss": "^7.0.7",
     "postcss-less": "^3.1.0",
     "postcss-safe-parser": "^4.0.1",

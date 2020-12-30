@@ -62,7 +62,7 @@ function iterateCode (source, onStyleTag, onStyleAttribute) {
 			if (disable || name !== "style") {
 				return;
 			}
-			const endIndex = parser._tokenizer._index;
+			const endIndex = parser.tokenizer._index;
 			const startIndex = endIndex - content.length;
 			if (source[startIndex - 1] !== source[endIndex] || !/\S/.test(source[endIndex])) {
 				return;
