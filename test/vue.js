@@ -3,15 +3,13 @@
 const expect = require("chai").expect;
 const autoprefixer = require("autoprefixer");
 const postcss = require("postcss");
-const syntax = require("../")({
-	stylus: "css",
-});
+const syntax = require("../")();
 
 describe("vue tests", () => {
 	it("autoprefixer", () => {
 		return postcss([
 			autoprefixer({
-				browsers: ["Chrome >= 1"],
+				overrideBrowserslist: ["Chrome >= 1"],
 				cascade: false,
 			}),
 		]).process([
@@ -26,7 +24,7 @@ describe("vue tests", () => {
 			"  animation: fade 1s;",
 			"}",
 			"</style>",
-			"<style scoped lang=\"stylus\" module>",
+			"<style scoped lang=\"sugarss\" module>",
 			".red",
 			"  color: red",
 			"</style>",
@@ -53,7 +51,7 @@ describe("vue tests", () => {
 				"  animation: fade 1s;",
 				"}",
 				"</style>",
-				"<style scoped lang=\"stylus\" module>",
+				"<style scoped lang=\"sugarss\" module>",
 				".red",
 				"  color: red",
 				"</style>",
