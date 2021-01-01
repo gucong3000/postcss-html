@@ -44,20 +44,20 @@
     "htmlparser2": "^6.0.0"
   },
   "peerDependencies": {
-    "postcss": ">=5.0.0",
+    "postcss": "^8.2.2",
     "postcss-syntax": ">=0.36.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.4.3",
+    "autoprefixer": "^10.1.0",
     "chai": "^4.2.0",
     "codecov": "^3.8.1",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
-    "postcss": "^7.0.7",
-    "postcss-less": "^3.1.0",
-    "postcss-safe-parser": "^4.0.1",
-    "postcss-scss": "^2.0.0",
-    "postcss-syntax": ">=0.36.0",
-    "sugarss": "^2.0.0"
+    "postcss": "^8.2.2",
+    "postcss-less": "^4.0.0",
+    "postcss-safe-parser": "^5.0.2",
+    "postcss-scss": "^3.0.4",
+    "postcss-syntax": "github:stylelint/postcss-syntax#postcss-8",
+    "sugarss": "^3.0.3"
   }
 }
